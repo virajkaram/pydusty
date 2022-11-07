@@ -19,11 +19,11 @@ The following functionalities are present in Scott's `dusty/' but not in `emcee/
 It should be straightforward to implement these, I just haven;t encountered data where these are necessary. <br>
 Happy to add these in for compelling science cases, or even better, accept contributions here.
 
-##Instructions
+## Instructions
 For `emcee`, first edit `emcee/dusty_emcee_parallel_molabs.py` with the required prior types, prior ranges and initial values.
 An example file with luminosities is given in `data/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat`.
 Run `python emcee/dusty_emcee_parallel_molabs.py`.
 For `nprocesses=4`, this will make 4 directories where the total number of iterations are split. These can be visualised using `emcee/plotting_parallel.py` (which will make posterior corner plots, and best-fits).
 
-##Improvements
+## Improvements
 Agreed that the code structure and ways to provide user-inputs are very suboptimal, but will be improved soon (ish). 
