@@ -1,0 +1,9 @@
+Downloaded more Kurucz atmospheres:
+./extract.pl
+
+see http://www.oact.inaf.it/castelli/castelli/grids.html for list of models
+
+./extract2.pl
+ls *g45* | awk '{print "perl smooth2.pl "$1" kurucz"$1" temp temp"}' > makehotkurucz
+
+

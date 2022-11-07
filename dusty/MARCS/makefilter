@@ -1,0 +1,80 @@
+#
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat 2MASS_2MASS.J.dat filtJ.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat 2MASS_2MASS.H.dat filtH.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat 2MASS_2MASS.Ks.dat filtKs.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat Spitzer_IRAC.I1.dat filtC1.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat Spitzer_IRAC.I2.dat filtC2.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat Spitzer_IRAC.I3.dat filtC3.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat Spitzer_IRAC.I4.dat filtC4.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f336w_001.txt filtU.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f439w_001.txt filtB.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f555w_001.txt filtV.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f814w_001.txt filtI.dat
+# Added by Scott Adams - 1 May 2014:
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f110w.IR.txt filtWFC3irF110W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f160w.IR.txt filtWFC3irF160W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f275w.UVIS2.txt filtWFC3uvF275W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f336w.UVIS2.txt filtWFC3uvF336W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f438w.UVIS2.txt filtWFC3uvF438W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f555w.UVIS2.txt filtWFC3uvF555W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat f814w.UVIS2.txt filtWFC3uvF814W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat HST_WFPC2.f606w.txt filtWFPC2F606W.dat
+# - end 1 May 2014 addition
+#
+# Added by Scott Adams - 30 Oct 2014:
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat acs_f435w.txt filtACSWFCF435W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat acs_f555w.txt filtACSWFCF555W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat acs_f814w.txt filtACSWFCF814W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f555w_001.txt filtWFPC2F555W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat wfpc2_f814w_001.txt filtWFPC2F814W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/f606w.UVIS2.txt filtWFC3uvF606W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/f475w.UVIS2.txt filtWFC3uvF475W.dat
+# 
+# Added by Scott Adams 29 Jan 2015 - LBT filters!
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrY.dat 		filtlbcrY.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrSDSSz.dat		filtlbcrSDSSz.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrSDSSr.dat		filtlbcrSDSSr.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrSDSSi.dat		filtlbcrSDSSi.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrBesselV.dat	filtlbcrBesselV.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrBesselR.dat	filtlbcrBesselR.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcrBesselI.dat	filtlbcrBesselI.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbSDSSr.dat		filtlbcbSDSSr.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbSDSSg.dat		filtlbcbSDSSg.dat 
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbUspec.dat		filtlbcbUspec.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbBesselV.dat	filtlbcbBesselV.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbBesselU.dat	filtlbcbBesselU.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/lbcbBesselB.dat	filtlbcbBesselB.dat
+#
+# Added by Scott Adams 18 March 2015 - SST MIPS filters
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Spitzer_MIPS.24mu.dat   filtF24.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Spitzer_MIPS.70mu.dat   filtF70.dat
+#
+# Added by Scott Adams 8 May 2015 - 2MASS Ks-band
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/2MASS_Ks.dat   filtKs.dat
+#
+# Added by Scott Adams 20 May 2015 - more HST/ACS
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat acs_f475w.txt filtACSWFCF475W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat acs_f606w.txt filtACSWFCF606W.dat
+# Added by Scott Adams 15 Sep 2015 - Swift, WISE, misc
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Swift_UVOT.UVW1.dat  filtSW1.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Swift_UVOT.UVW2.dat  filtSW2.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/UKIRT_UKIDSS.K.dat  filtK.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Generic_Bessell.U.dat  filtU.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/WISE_WISE.W1.dat  filtF34W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/WISE_WISE.W2.dat  filtF46W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/WISE_WISE.W3.dat  filtF12W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/WISE_WISE.W4.dat  filtF22W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/AKARI_IRC.N2.dat  filtF24A.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/AKARI_IRC.N3.dat  filtF32A.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/AKARI_IRC.N4.dat  filtF41A.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/SLOAN_SDSS.u.dat  filtsdssu.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/SLOAN_SDSS.g.dat  filtsdssg.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/SLOAN_SDSS.r.dat  filtsdssr.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/SLOAN_SDSS.i.dat  filtsdssi.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/SLOAN_SDSS.z.dat  filtsdssz.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/Spitzer_MIPS.24mu.dat filtF240.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/HST_WFPC2.f439w.dat filtWFPC2F439W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/HST_WFPC2.f675w.dat filtWFPC2F675W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/HST_WFPC2.f450w.dat filtWFPC2F450W.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/wfc_F658N.dat filtACSWFCF658N.dat
+perl smooth2.pl s3300_g-0.5_m15._t05_st_z+0.00_a+0.00_c+0.00_n+0.00_o+0.00_r+0.00_s+0.00.flx temp.dat filters_raw/NICMOS_F160W.dat filtNIC3F160W.dat

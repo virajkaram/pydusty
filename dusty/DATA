@@ -1,0 +1,8 @@
+dist 5.4
+egal 0.037
+file premags.dat
+  24 -1 V mag
+  0.013 -1 mjy F36
+  0.018 0.005 mjy F45
+  0.022 0.007 mjy F58
+  0.044 0.009 mjy F80

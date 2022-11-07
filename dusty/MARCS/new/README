@@ -1,0 +1,8 @@
+
+
+In each file: col.3=wavelength in nm
+              col.4=frequency nu (s^-1)
+              col.5=Hnu (erg/cm^2/s/Hz/ster)
+              col.6=Hcont (erg/cm^2/s/Hz/ster)
+              col.7=Hnu/Hcont
+Flambda=4*Hnu*c/wavelength^2  c=light velocity     

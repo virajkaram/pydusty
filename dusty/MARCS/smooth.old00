@@ -1,0 +1,29 @@
+#!/usr/local/bin/perl
+
+$input  = $ARGV[0];
+$output = $ARGV[1];
+open(INPUT1,"<$input");
+open(INPUT2,"<flx_wavelengths.vac");
+open(OUTPUT,">$output");
+$n    = 0;
+$navg = 100;
+$wbar = 0.0;
+$fbar = 0.0;
+while(<INPUT1>) {
+  $flux = $_;
+  $wave = <INPUT2>;
+  $flux =~ s/\n//;
+  $wave =~ s/\n//;
+  $wave /= 10000.0;
+  $n++;
+  $wbar += $wave;
+  $fbar += $flux;
+  if ($n > 99) {
+    $wbar /= $n;
+    $fbar /= $n;
+    printf OUTPUT "%13.6f %13.6f\n",$wbar,$fbar;
+    $wbar = 0.0;
+    $fbar = 0.0;
+    $n    = 0;
+    }
+  }
