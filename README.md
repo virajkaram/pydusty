@@ -20,9 +20,9 @@ It should be straightforward to implement these, I just haven;t encountered data
 Happy to add these in for compelling science cases, or even better, accept contributions here.
 
 ## Instructions
-For `emcee`, first edit `emcee/dusty_emcee_parallel_molabs.py` with the required prior types, prior ranges and initial values.
-An example file with luminosities is given in `data/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat`.
-Run `python emcee/dusty_emcee_parallel_molabs.py`.
+For `emcee`, first edit `emcee/dusty_emcee_parallel_molabs.py` with the required prior types, prior ranges and initial values.<br>
+An example file with luminosities is given in `data/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat`.<br>
+Run `python emcee/dusty_emcee_parallel_molabs.py`.<br>
 For `nprocesses=4`, this will make 4 directories where the total number of iterations are split. These can be visualised using `emcee/plotting_parallel.py` (which will make posterior corner plots, and best-fits).
 
 ## Improvements
