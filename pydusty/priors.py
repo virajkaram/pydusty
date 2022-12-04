@@ -46,7 +46,6 @@ class Prior:
 
         for ind, i in enumerate(xranges):
             prob_value = prob_values[ind]
-            print('Prob value', prob_value)
             distsamples.extend([i for j in range(int(1e3 * prob_value))])
 
         distsamples = np.array(distsamples)
