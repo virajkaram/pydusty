@@ -6,13 +6,19 @@ class Prior:
     def prior_extent(self) -> tuple:
         raise NotImplementedError
 
+    @property
+    def required_n_parameters(self):
+        raise NotImplementedError
+
+    @property
+    def name(self):
+        raise NotImplementedError
+
     def __init__(self,
                  name,
                  prior_parameters,
                  required_n_parameters):
-        self.name = name
         self.prior_parameters = prior_parameters
-        self.required_n_parameters = required_n_parameters
 
     def get_log_value(self, value):
         raise NotImplementedError
@@ -41,10 +47,10 @@ class Prior:
 
 
 class GaussianPrior(Prior):
-
+    required_n_parameters = 2
+    name = 'gaussian'
+    
     def __init__(self, *args, **kwargs):
-        self.name = 'gaussian'
-        self.required_n_parameters = 2
         super(GaussianPrior, self).__init__(*args, **kwargs)
         self.validate_prior_parameters()
         self.mu, self.sigma = self.prior_parameters
@@ -57,10 +63,10 @@ class GaussianPrior(Prior):
 
 
 class UniformPrior(Prior):
+    required_n_parameters = 2
+    name = 'uniform'
 
     def __init__(self, *args, **kwargs):
-        self.name = 'uniform'
-        self.required_n_parameters = 2
         super(UniformPrior, self).__init__(*args, **kwargs)
         self.validate_prior_parameters()
         self.minimum, self.maximum = self.prior_parameters
