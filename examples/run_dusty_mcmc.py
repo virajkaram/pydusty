@@ -79,7 +79,7 @@ if __name__ == '__main__':
         emcee_runner = Emcee(obsdata=ext_corrected_obsdata,
                              object_photometry_file=args.object_photometry_file,
                              nwalkers=args.nwalkers,
-                             ntrials=args.ntrials/nprocesses,
+                             ntrials=int(args.ntrials/nprocesses),
                              dusty=basic_dusty,
                              correct_for_molecular_absorption=args.molecular_absorption,
                              molecular_absorption_lookup_table_path=args.molecular_table_path,
