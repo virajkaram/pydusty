@@ -15,9 +15,7 @@ class Prior:
         raise NotImplementedError
 
     def __init__(self,
-                 name,
-                 prior_parameters,
-                 required_n_parameters):
+                 prior_parameters):
         self.prior_parameters = prior_parameters
 
     def get_log_value(self, value):
@@ -49,7 +47,7 @@ class Prior:
 class GaussianPrior(Prior):
     required_n_parameters = 2
     name = 'gaussian'
-    
+
     def __init__(self, *args, **kwargs):
         super(GaussianPrior, self).__init__(*args, **kwargs)
         self.validate_prior_parameters()
