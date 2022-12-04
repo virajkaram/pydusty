@@ -32,8 +32,7 @@ setuptools.setup(
         "jupyter",
         "matplotlib",
         "numpy",
-        "pandas",
-        "multiprocessing"
+        "pandas"
     ],
     package_data={
     }
