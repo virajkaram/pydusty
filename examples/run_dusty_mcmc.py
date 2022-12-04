@@ -56,7 +56,7 @@ if __name__ == '__main__':
     tstart = datetime.utcnow()
     emcee_runners = []
 
-    for process_num in nprocesses:
+    for process_num in range(nprocesses):
         dusty_parameters = DustyParameters(
             tstar=tstar,
             tdust=tdust,
