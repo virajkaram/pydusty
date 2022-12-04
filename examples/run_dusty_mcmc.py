@@ -2,12 +2,16 @@ from pydusty.dusty import Dusty, DustyParameters
 from pydusty.mcmc import Emcee
 from pydusty.parameters import Parameter
 from pydusty.priors import GaussianPrior, UniformPrior
-from pydusty.utils import get_default_argparser, load_and_extcor_data
+from pydusty.utils import get_default_argparser, load_and_extcor_data, getLogger
+import logging
+import sys
+
 
 if __name__ == '__main__':
 
     argparser = get_default_argparser()
     args = argparser.parse_args()
+    logger = getLogger(args.loglevel, args.logfile)
 
     # Set initial parameters
     tstar = Parameter(name='tstar',

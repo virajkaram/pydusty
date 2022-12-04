@@ -3,6 +3,7 @@ import logging
 import os
 from astropy.io import ascii
 import argparse
+import sys
 
 
 logger = logging.getLogger(__name__)
@@ -113,5 +114,20 @@ def get_default_argparser():
     parser.add_argument('--extrapolation', action="store_true", help='extrapolation?')
     parser.add_argument('--continue_from_file', action="store_true", help='Continue from an existing file?')
     parser.add_argument('--chi_square_limits_only', type=float, default=4.0, help='chisq. for limits only case')
+    parser.add_argument('--loglevel', type=str, default='DEBUG', help='logging level')
+    parser.add_argument('--logfile', type=str, default=None, help='log file')
 
     return parser
+
+
+def getLogger(level, logfile=None):
+    logger = logging.getLogger("pydusty")
+    formatter = logging.Formatter('%(name)s [l %(lineno)d] - %(levelname)s - %(message)s')
+    if logfile is None:
+        handler = logging.StreamHandler(sys.stdout)
+    else:
+        handler = logging.FileHandler(logfile)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.setLevel(level)
+    return logger
