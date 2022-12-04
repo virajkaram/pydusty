@@ -274,7 +274,11 @@ class Emcee:
         lam, flx, npt, r1, ierror = self.dusty.get_results()
 
         chi2, sluml = self.calculate_chi2(lam, flx, parameter_dict)
+
         log_post = chi2 + lgpri
+
+        logger.info(f'log_chi2: {chi2}')
+        logger.info(f'log_post: {log_post}')
         return log_post, sluml, r1
 
     def run_mcmc(self):
