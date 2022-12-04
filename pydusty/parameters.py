@@ -1,8 +1,8 @@
-from __future__ import annotations
-
 from pydusty.priors import Prior
 import numpy as np
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Parameter:
     def __init__(self,
@@ -71,7 +71,7 @@ class DustyParameters:
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 
-        if not self.custom_grain_distribution:
+        if not self.custom_grain_distribution.value:
             self.min_grain_size = Parameter(name='min_grain_size', value=0, is_variable=False)
             self.max_grain_size = Parameter(name='max_grain_size', value=0, is_variable=False)
 
@@ -80,7 +80,10 @@ class DustyParameters:
                 err = 'custom grain size requested, but no min_grain_size or max_grain_size specified.'
                 raise AttributeError(err)
         self.parameter_dictionary = vars(self)
-        self.parameter_list = [self.parameter_dictionary[x] for x in self.parameter_dictionary]
+        self.parameter_list = [self.parameter_dictionary[x] for x in self.parameter_dictionary.keys() if isinstance(self.parameter_dictionary[x], Parameter)]
+
+        # logger.debug(self.parameter_dictionary)
+        # logger.debug(self.parameter_list)
 
     def get_printable_string(self):
         return ''
