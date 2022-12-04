@@ -32,8 +32,7 @@ setuptools.setup(
         "jupyter",
         "matplotlib",
         "numpy",
-        "pandas",
-        "logging"
+        "pandas"
     ],
     package_data={
     }
