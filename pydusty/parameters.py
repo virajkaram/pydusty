@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pydusty.priors import Prior
 import numpy as np
 
@@ -5,7 +7,7 @@ import numpy as np
 class Parameter:
     def __init__(self,
                  name: str,
-                 value: float,
+                 value: float | bool | str,
                  is_variable: bool=False,
                  prior: Prior = None):
         self.name = name
