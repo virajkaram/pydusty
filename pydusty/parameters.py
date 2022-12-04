@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pydusty.priors import Prior
 import numpy as np
 import logging
