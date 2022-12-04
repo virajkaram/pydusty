@@ -26,7 +26,7 @@ setuptools.setup(
     install_requires=[
         "astropy",
         "numpy",
-        "emcee=0.0.0",
+        "emcee==0.0.0",
         "pandas",
         "psycopg[binary]",
         "jupyter",
