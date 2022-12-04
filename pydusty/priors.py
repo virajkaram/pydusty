@@ -1,10 +1,9 @@
 import numpy as np
+import logging
 
+logger = logging.getLogger()
 
 class Prior:
-    @property
-    def prior_extent(self) -> tuple:
-        raise NotImplementedError
 
     @property
     def required_n_parameters(self):
@@ -12,6 +11,9 @@ class Prior:
 
     @property
     def name(self):
+        raise NotImplementedError
+
+    def prior_limits(self) -> tuple:
         raise NotImplementedError
 
     def __init__(self,
@@ -28,14 +30,23 @@ class Prior:
 
     def get_samples(self, nsamples):
         distsamples = self.return_distsamples()
-        randindex = np.random.randint(len(distsamples), nsamples)
+        randindex = np.random.randint(len(distsamples), size=nsamples)
         random_samples = distsamples[randindex]
         return random_samples
 
     def return_distsamples(self):
         distsamples = []
-        for i in np.linspace(self.prior_extent[0], self.prior_extent[1], 100):
-            prob_value = 10**self.get_log_value(i)
+        prior_extent = self.prior_limits()
+
+        xranges = np.linspace(prior_extent[0], prior_extent[1], 100)
+        prob_values = np.array([np.exp(self.get_log_value(x)) for x in xranges])
+        min_prob = np.min(prob_values[prob_values > 0])
+        power = np.floor(np.log10(min_prob))
+        prob_values = prob_values/(10**power)
+
+        for ind, i in enumerate(xranges):
+            prob_value = prob_values[ind]
+            print('Prob value', prob_value)
             distsamples.extend([i for j in range(int(1e3 * prob_value))])
 
         distsamples = np.array(distsamples)
@@ -53,7 +64,7 @@ class GaussianPrior(Prior):
         self.validate_prior_parameters()
         self.mu, self.sigma = self.prior_parameters
 
-    def prior_extent(self):
+    def prior_limits(self):
         return self.sigma - 5 * self.mu, self.sigma + 5 * self.mu
 
     def get_log_value(self, value):
@@ -69,11 +80,11 @@ class UniformPrior(Prior):
         self.validate_prior_parameters()
         self.minimum, self.maximum = self.prior_parameters
 
-    def prior_extent(self):
+    def prior_limits(self):
         return self.minimum, self.maximum
 
     def get_log_value(self, value):
-        if self.minimum < value < self.maximum:
+        if np.logical_and((self.minimum < value), (self.maximum > value)):
             return np.log(1 / (self.maximum - self.minimum))
         else:
             return -np.inf
