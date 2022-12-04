@@ -1,4 +1,5 @@
 from pydusty.priors import Prior
+import numpy as np
 
 
 class Parameter:
@@ -34,17 +35,21 @@ class Parameter:
             return log_prior_value
 
 
+false_boolean_parameter = Parameter(name='generic_false_param', value=False, is_variable=False)
+true_boolean_parameter = Parameter(name='generic_true_param', value=True, is_variable=False)
+default_tstarmin_parameter = Parameter(name='tstarmin', value=3500, is_variable=False)
+default_tstarmax_parameter = Parameter(name='tstarmax', value=48999, is_variable=False)
 class DustyParameters:
     def __init__(self,
-                 tstar: Parameter =None,
-                 tdust: Parameter =None,
-                 tau: Parameter =None,
-                 shell_thickness: Parameter =None,
-                 dust_type: Parameter =None,
-                 blackbody: Parameter = None,
-                 tstarmin: Parameter = None,
-                 tstarmax: Parameter = None,
-                 custom_grain_distribution: Parameter = None,
+                 tstar: Parameter,
+                 tdust: Parameter,
+                 tau: Parameter,
+                 shell_thickness: Parameter,
+                 dust_type: Parameter,
+                 blackbody: Parameter,
+                 tstarmin: Parameter = default_tstarmin_parameter,
+                 tstarmax: Parameter = default_tstarmax_parameter,
+                 custom_grain_distribution: Parameter = false_boolean_parameter,
                  min_grain_size: Parameter = None,
                  max_grain_size: Parameter = None,
                  ebv: Parameter = None
@@ -64,9 +69,14 @@ class DustyParameters:
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 
-        if self.custom_grain_distribution is None:
+        if not self.custom_grain_distribution:
             self.min_grain_size = Parameter(name='min_grain_size', value=0, is_variable=False)
             self.max_grain_size = Parameter(name='max_grain_size', value=0, is_variable=False)
+
+        else:
+            if np.logical_or(self.min_grain_size is None, self.max_grain_size is None):
+                err = 'custom grain size requested, but no min_grain_size or max_grain_size specified.'
+                raise AttributeError(err)
         self.parameter_dictionary = vars(self)
         self.parameter_list = [self.parameter_dictionary[x] for x in self.parameter_dictionary]
 
