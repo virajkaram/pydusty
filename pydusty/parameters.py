@@ -91,7 +91,7 @@ class DustyParameters:
         info_str = ''
         for x in self.parameter_dictionary:
             if isinstance(self.parameter_dictionary[x], Parameter):
-                info_str += f'{x}:{self.parameter_dictionary[x]}\n'
+                info_str += f'{x}:{self.parameter_dictionary[x].value}\n'
         return info_str
 
     def __iter__(self):
