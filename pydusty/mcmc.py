@@ -298,7 +298,8 @@ class Emcee:
         variable_parameter_initpos = [x.value for x in self.variable_parameters]
         variable_parameter_initpos_nwalkers = np.array([x.prior.get_samples(nsamples=self.nwalkers) for x in self.variable_parameters]).T
 
-        outfilename = f'{self.object_photometry_file}_results.dat'
+        output_file_basename = os.path.basename(self.object_photometry_file) + '_results.dat'
+        outfilename = f'{self.dusty.dusty_working_directory}/{output_file_basename}'
         if not self.continue_from_file:
             f = open(outfilename, "w")
             f.write(f'#Initial points {variable_parameter_initpos_nwalkers}\n')
