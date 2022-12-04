@@ -247,12 +247,6 @@ class Emcee:
 
         return -0.5 * chi, sluml
 
-    def get_log_prior(self):
-        logprior = 1
-        for parameter in self.variable_parameters:
-            logprior += parameter.prior.get_log_value()
-        return logprior
-
     def log_posterior(self, varx):
         parameter_dict = {}
         for parameter in self.dusty.parameters.parameter_list:
@@ -265,10 +259,11 @@ class Emcee:
             raise AttributeError(err)
         parameter_dict['fileuse'] = fileuse
 
+        lgpri = 0
         for idx in range(len(varx)):
             self.variable_parameters[idx].update_value(varx[idx])
+            lgpri += self.variable_parameters[idx].prior.get_log_value(varx[idx])
 
-        lgpri = self.get_log_prior()
         if lgpri == -np.inf:
             return lgpri, lgpri, lgpri
 
