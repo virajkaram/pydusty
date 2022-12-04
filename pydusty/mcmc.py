@@ -308,7 +308,7 @@ class Emcee:
         dtype = [("sluml", float), ("r1", float)]
 
         sampler = emcee.EnsembleSampler(self.nwalkers, self.ndim, self.log_posterior, blobs_dtype=dtype)
-        logger.info(sampler.random_state)
+        # logger.info(sampler.random_state)
         # sampler.random_state.setter(state.get_state)
 
         for result in sampler.sample(variable_parameter_initpos_nwalkers, iterations=self.ntrials, progress=True, store=True):
