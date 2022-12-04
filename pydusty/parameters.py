@@ -88,7 +88,11 @@ class DustyParameters:
         # logger.debug(self.parameter_list)
 
     def get_printable_string(self):
-        return ''
+        info_str = ''
+        for x in self.parameter_dictionary:
+            if isinstance(self.parameter_dictionary[x], Parameter):
+                info_str += f'{x}:{self.parameter_dictionary[x]}\n'
+        return info_str
 
     def __iter__(self):
         for x in self.parameter_list:
