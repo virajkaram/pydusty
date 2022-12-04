@@ -22,9 +22,9 @@ class BaseDusty:
         if not os.path.exists(self.dusty_working_directory):
             os.makedirs(self.dusty_working_directory)
         os.system(f'cp data/dusty_files/dusty {self.dusty_working_directory}/')
-        os.system(f'cp data/dusty.inp {self.dusty_working_directory}/')
-        os.system(f'cp data/dusty.f {self.dusty_working_directory}/')
-        os.system(f'cp data/lambda_grid.dat {self.dusty_working_directory}/')
+        os.system(f'cp data/dusty_files/dusty.inp {self.dusty_working_directory}/')
+        os.system(f'cp data/dusty_files/dusty.f {self.dusty_working_directory}/')
+        os.system(f'cp data/dusty_files/lambda_grid.dat {self.dusty_working_directory}/')
         logger.info(f'Copied dusty files to {self.dusty_working_directory}')
 
     def generate_input(self):
