@@ -289,7 +289,7 @@ class Emcee:
 
         seedind = self.random_seed ** 2
         np.random.seed(seedind)
-        logger.info('Seed for np is', seedind)
+        logger.info(f'Seed for np is {seedind}')
         # state = np.random.RandomState(seedind)
 
         variable_parameter_names = [x.name for x in self.variable_parameters]
