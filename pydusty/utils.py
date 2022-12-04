@@ -105,7 +105,7 @@ def get_default_argparser():
     parser.add_argument('--workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--nwalkers', type=int, default=10, help='Number of emcee walkers')
     parser.add_argument('--ntrials', type=int, default=1000, help='Total number of emcee trials per walker')
-    parser.add_argument('--nprocessors', type=int, default=4, help='Number of processors to use')
+    parser.add_argument('--nprocesses', type=int, default=1, help='Number of processors to use')
     parser.add_argument('--ebv', type=float, default=0, help='E_B-V to use')
     parser.add_argument('--molecular_absorption', action="store_true", help='Correct for molecular absorption?')
     parser.add_argument('--molecular_table_path', type=str, default=None, help='Path to molecular lookup tables')
