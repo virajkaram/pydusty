@@ -111,8 +111,8 @@ class Emcee:
             detection_observed_fluxerrs = observed_fluxerrs[detection_mask]
             limits_observed_fluxerrs = observed_fluxerrs[limit_mask]
 
-            chi_array[detection_mask] = ((np.log10(detection_observed_fluxes) - np.log10(scaled_model_fluxes))/(np.log10(detection_observed_fluxerrs)))**2
-            chi_array[limit_mask] = (scaled_model_fluxes/limits_observed_fluxerrs)**2
+            chi_array[detection_mask] = ((np.log10(detection_observed_fluxes) - np.log10(scaled_model_fluxes[detection_mask]))/(np.log10(detection_observed_fluxerrs)))**2
+            chi_array[limit_mask] = (scaled_model_fluxes[limit_mask]/limits_observed_fluxerrs)**2
 
             chi_Lobs = np.sum(chi_array)
             eweight = 1.0
