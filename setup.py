@@ -26,13 +26,14 @@ setuptools.setup(
     install_requires=[
         "astropy",
         "numpy",
-        "emcee==0.0.0",
+        "emcee",
         "pandas",
         "psycopg[binary]",
         "jupyter",
         "matplotlib",
         "numpy",
-        "pandas"
+        "pandas",
+        "multiprocessing"
     ],
     package_data={
     }
