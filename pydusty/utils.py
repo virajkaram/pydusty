@@ -99,9 +99,9 @@ def load_and_extcor_data(object_photometry_file: str, ebv=0):
 def get_default_argparser():
     parser = argparse.ArgumentParser()
     parser.add_argument('object_photometry_file', type=str, help='photometry file')
-    parser.add_argument('--tstar', type=float, default=6000, help='Initial stellar temperature value')
-    parser.add_argument('--tstarmin', type=float, default=6000, help='Initial stellar temperature value')
-    parser.add_argument('--tstarmax', type=float, default=6000, help='Initial stellar temperature value')
+    # parser.add_argument('--tstar', type=float, default=6000, help='Initial stellar temperature value')
+    # parser.add_argument('--tstarmin', type=float, default=6000, help='Initial stellar temperature value')
+    # parser.add_argument('--tstarmax', type=float, default=6000, help='Initial stellar temperature value')
     parser.add_argument('--workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--nwalkers', type=int, default=10, help='Number of emcee walkers')
     parser.add_argument('--ntrials', type=int, default=1000, help='Total number of emcee trials per walker')
