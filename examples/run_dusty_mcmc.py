@@ -53,8 +53,9 @@ if __name__ == '__main__':
     nprocesses = args.nprocesses
     logger.info(f"Creating {nprocesses} processes.")
     pool = Pool(nprocesses)
-
+    tstart = datetime.utcnow()
     emcee_runners = []
+
     for process_num in nprocesses:
         dusty_parameters = DustyParameters(
             tstar=tstar,
@@ -93,3 +94,5 @@ if __name__ == '__main__':
         emcee_runners.append(emcee_runner)
 
     pool.map(run_mcmc_process, emcee_runners)
+    tend = datetime.utcnow()
+    logger.info(f'Start {tstart}, End {tend}')
