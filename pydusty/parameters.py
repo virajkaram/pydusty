@@ -64,6 +64,9 @@ class DustyParameters:
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 
+        if self.custom_grain_distribution is None:
+            self.min_grain_size = Parameter(name='min_grain_size', value=0, is_variable=False)
+            self.max_grain_size = Parameter(name='max_grain_size', value=0, is_variable=False)
         self.parameter_dictionary = vars(self)
         self.parameter_list = [self.parameter_dictionary[x] for x in self.parameter_dictionary]
 
