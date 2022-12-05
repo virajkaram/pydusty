@@ -311,6 +311,11 @@ class Emcee:
             f.write(f'#Variables: {variable_parameter_names}\n')
             f.write(f'#Priors: {variable_parameter_pritypes}\n')
             f.write(f'#Prior params: {variable_parameter_priparams}\n')
+            for varname in variable_parameter_names:
+                f.write(f"{varname}\t")
+            f.write(f"log_scaling\t")
+            f.write(f"r1\t")
+            f.write(f"log_posterior\n")
             f.close()
 
         logger.info(
