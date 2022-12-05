@@ -18,8 +18,9 @@ class BaseDusty:
         self.parameters = parameters
         self.file_basename = file_basename
         self.dusty_working_directory = dusty_working_directory
-        self.setup_dusty_dir()
         self.dusty_file_directory = dusty_file_directory
+
+        self.setup_dusty_dir()
 
     def setup_dusty_dir(self):
         if not os.path.exists(self.dusty_working_directory):
