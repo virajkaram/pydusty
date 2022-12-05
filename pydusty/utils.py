@@ -4,6 +4,8 @@ import os
 from astropy.io import ascii
 import argparse
 import sys
+import corner
+import matplotlib.pyplot as plt
 
 
 logger = logging.getLogger(__name__)
@@ -132,3 +134,13 @@ def getLogger(level, logfile=None):
     logger.addHandler(handler)
     logger.setLevel(level)
     return logger
+
+
+def make_corner_plot(chains_table, savefilename, labels=None):
+    if labels is None:
+        labels = chains_table.colnames
+    s = np.array([chains_table[x] for x in chains_table.columns[:len(labels)]])
+    s = s.transpose()
+
+    fig = corner.corner(s, labels=labels, show_titles=True, title_kwargs={"fontsize": 12})
+    plt.savefig(savefilename)
