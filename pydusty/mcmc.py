@@ -71,6 +71,9 @@ class Emcee:
         '''
         calculate a weighted scaling
         '''
+        log_observed_fluxes = np.log10(observed_fluxes)
+        log_observed_fluxerrs = observed_fluxerrs/(observed_fluxes * np.log(10))
+        log_model_fluxes = np.log10(model_fluxes)
         if fixLstar:
             log_weighted_luminosity_scaling = fixLstar
         elif limits_only:
@@ -81,8 +84,8 @@ class Emcee:
             weighted_scaling = chi_square_limits_only/(np.sum(scalings_array))
             log_weighted_luminosity_scaling = np.log10(weighted_scaling)
         else:
-            scalings_array = np.log10(observed_fluxes/model_fluxes)/(np.log10(observed_fluxerrs)**2)
-            weights_array = 1/(np.log10(observed_fluxerrs)**2)
+            scalings_array = np.sum((log_observed_fluxes - log_model_fluxes) / (log_observed_fluxerrs ** 2))
+            weights_array = np.sum(1 / log_observed_fluxerrs ** 2)
 
             log_weighted_luminosity_scaling = np.sum(scalings_array)/np.sum(weights_array)
 
@@ -107,12 +110,12 @@ class Emcee:
             limit_mask = (observed_fluxes < 0)
             detection_mask = np.invert(limit_mask)
 
-            detection_observed_fluxes = observed_fluxes[detection_mask]
-            detection_observed_fluxerrs = observed_fluxerrs[detection_mask]
-            limits_observed_fluxerrs = observed_fluxerrs[limit_mask]
+            log_observed_fluxes = np.log10(observed_fluxes)
+            log_observed_fluxerrs = observed_fluxerrs / (observed_fluxes * np.log(10))
+            log_model_fluxes = np.log10(scaled_model_fluxes)
 
-            chi_array[detection_mask] = ((np.log10(detection_observed_fluxes) - np.log10(scaled_model_fluxes[detection_mask]))/(np.log10(detection_observed_fluxerrs)))**2
-            chi_array[limit_mask] = (scaled_model_fluxes[limit_mask]/limits_observed_fluxerrs)**2
+            chi_array[detection_mask] = ((log_observed_fluxes[detection_mask] - log_model_fluxes[detection_mask])/log_observed_fluxerrs[detection_mask])**2
+            chi_array[limit_mask] = (scaled_model_fluxes[limit_mask]/observed_fluxerrs[limit_mask])**2
 
             chi_Lobs = np.sum(chi_array)
             eweight = 1.0
