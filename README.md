@@ -10,7 +10,12 @@ This code is based on Scott Adam's rewrite of Chris Kochanek's MCMC wrapper arou
 
 The dustyv2 source code files are under `data/dusty_files`. You may need to recreate the executable file with `gfortran dusty.f -o dusty`. Please see the dusty github repository (esp. https://github.com/ivezic/dusty/issues/7 issue) for more details.
 
-Test your install using `python examples/run_dusty_mcmc.py /home/viraj/pydusty_data/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat --workdir /home/viraj/pydusty_data/dusty_run --loglevel INFO --nprocesses 4`
+To test your install, copy `data/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat` to your favorite directory on your computer (hereafter labelled as `<pydusty_data_path>`).<br>
+Make a directory `<pydusty_data_path>/dusty_run`. <br>
+From the pydusty directory, run `python examples/run_dusty_mcmc.py <pydusty_data_path>/lums_WISE_J175749.76-075314.9_ebv1.18_nodisterr.dat --workdir <pydusty_data_path>/dusty_run --loglevel INFO --nprocesses 4`. <br>
+The full code takes a couple hours to run, but if it runs without interruptions for ~5 minutes, your install has worked correctly.
+
+(Better tests will follow)
 
 ## Usage
 An example usage file is given under `examples/run_dusty_mcmc.py (--h)`. Detailed documentation of the code will follow soon.
