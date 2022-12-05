@@ -38,7 +38,7 @@ if __name__ == '__main__':
     shell_thickness = Parameter(name='shell_thickness',
                                 value=2.0)
     dust_type = Parameter(name='dust_type',
-                          value=1)
+                          value='graphite')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
@@ -47,8 +47,6 @@ if __name__ == '__main__':
                                           value=False)
 
     working_dir = args.workdir
-    if working_dir is None:
-        working_dir = './run'
 
     nprocesses = args.nprocesses
     logger.info(f"Creating {nprocesses} processes.")
@@ -72,6 +70,7 @@ if __name__ == '__main__':
         dusty_process_working_dir = working_dir + f'_{process_num}'
         basic_dusty = Dusty(parameters=dusty_parameters,
                             dusty_working_directory=dusty_process_working_dir,
+                            dusty_file_directory=args.dusty_file_dir
                             )
 
         ext_corrected_obsdata = load_and_extcor_data(args.object_photometry_file)
