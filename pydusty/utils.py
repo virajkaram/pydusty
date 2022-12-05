@@ -102,7 +102,7 @@ def get_default_argparser():
     # parser.add_argument('--tstar', type=float, default=6000, help='Initial stellar temperature value')
     # parser.add_argument('--tstarmin', type=float, default=6000, help='Initial stellar temperature value')
     # parser.add_argument('--tstarmax', type=float, default=6000, help='Initial stellar temperature value')
-    parser.add_argument('--workdir', type=str, default=None, help='dusty workdir name')
+    parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--nwalkers', type=int, default=10, help='Number of emcee walkers')
     parser.add_argument('--ntrials', type=int, default=1000, help='Total number of emcee trials per walker')
     parser.add_argument('--nprocesses', type=int, default=1, help='Number of processors to use')
@@ -116,6 +116,7 @@ def get_default_argparser():
     parser.add_argument('--chi_square_limits_only', type=float, default=4.0, help='chisq. for limits only case')
     parser.add_argument('--loglevel', type=str, default='DEBUG', help='logging level')
     parser.add_argument('--logfile', type=str, default=None, help='log file')
+    parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files', help='Directory with dusty code files')
 
     return parser
 
