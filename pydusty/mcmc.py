@@ -305,8 +305,12 @@ class Emcee:
         outfilename = f'{self.dusty.dusty_working_directory}/{output_file_basename}'
         if not self.continue_from_file:
             f = open(outfilename, "w")
-            f.write(f'#Initial points {variable_parameter_initpos_nwalkers}\n')
-            f.write(f'#Priors on {variable_parameter_names} {variable_parameter_pritypes} {variable_parameter_priparams}\n')
+            f.write(f'#Initial points\n')
+            for initpos in variable_parameter_initpos_nwalkers:
+                f.write(f'# {initpos}\n')
+            f.write(f'#Variables: {variable_parameter_names}\n')
+            f.write(f'#Priors: {variable_parameter_pritypes}\n')
+            f.write(f'#Prior params: {variable_parameter_priparams}\n')
             f.close()
 
         logger.info(
