@@ -1,7 +1,7 @@
 # pydusty
 A generic python wrapper for performing MCMC analysis with the SED modeling code `dusty`.
 
-This code is based on Scott Adam's rewrite of Chris Kochanek's MCMC wrapper around `dusty`, and my subsequent rewrite of Scott's wrapper using `emcee'. The original codes are available under `pydusty/legacy`.
+This code is based on Scott Adam's rewrite of Chris Kochanek's MCMC wrapper around `dusty`, and my subsequent rewrite of Scott's wrapper using `emcee`. The original codes are available under `pydusty/legacy`.
 
 ## Installation
 1. Clone the repo using `git clone`
