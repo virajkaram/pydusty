@@ -13,23 +13,30 @@ class BaseDusty:
                  parameters: DustyParameters,
                  dusty_working_directory: str,
                  file_basename='foo1',
+                 dusty_file_directory='data/dusty_files',
                  ):
         self.parameters = parameters
         self.file_basename = file_basename
         self.dusty_working_directory = dusty_working_directory
         self.setup_dusty_dir()
+        self.dusty_file_directory = dusty_file_directory
 
     def setup_dusty_dir(self):
         if not os.path.exists(self.dusty_working_directory):
             os.makedirs(self.dusty_working_directory)
-        os.system(f'cp data/dusty_files/dusty {self.dusty_working_directory}/')
-        os.system(f'cp data/dusty_files/dusty.inp {self.dusty_working_directory}/')
-        os.system(f'cp data/dusty_files/dusty.f {self.dusty_working_directory}/')
-        os.system(f'cp data/dusty_files/lambda_grid.dat {self.dusty_working_directory}/')
+
+        dusty_required_files = ['dusty', 'dusty.inp', 'dusty.f', 'lambda_grid.dat']
+        for req_file in dusty_required_files:
+            filepath = os.path.join(self.dusty_file_directory, req_file)
+            if not os.path.exists(filepath):
+                err = f'Required dusty file : {filepath} not found in dusty_file_directory {self.dusty_file_directory}'
+                raise ValueError(err)
+            os.system(f'cp {filepath} {self.dusty_working_directory}/')
+
         logger.info(f'Copied dusty files to {self.dusty_working_directory}')
 
     def generate_input(self):
-        pass
+        raise NotImplementedError
 
     def run(self):
         # if verbose:
@@ -95,7 +102,7 @@ class Dusty(BaseDusty):
             output.write('\n')
         output.write('   optical properties index = 1 \n')
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
-        if self.parameters.dust_type.value == 0:
+        if self.parameters.dust_type.value == 'graphite':
             output.write('    x = 0.00    0.00   0.00    1.00    0.00    0.00 \n')
         else:
             output.write('    x = 0.00    0.00   1.00    0.00    0.00    0.00 \n')
