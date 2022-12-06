@@ -20,6 +20,7 @@ class ParallelEmceeRunner:
                  working_dir: str,
                  obsdata: dict,
                  object_photometry_file: str,
+                 nprocesses: int,
                  ntrials: int = 250,
                  correct_for_molecular_absorption: bool =False,
                  molecular_absorption_lookup_table_path: str = None,
@@ -28,7 +29,6 @@ class ParallelEmceeRunner:
                  chi_square_limits_only: float = 4,
                  extrapolation: bool = False,
                  continue_from_file: bool = False,
-                 nprocesses: int = 1,
                  dusty_file_dir: str = 'data/dusty_files'
                  ):
         self.nwalkers = nwalkers
@@ -54,6 +54,7 @@ class ParallelEmceeRunner:
         emcee_runner.run_mcmc()
 
     def run(self):
+        logger.info(f"Creating {self.nprocesses} processes.")
         pool = Pool(self.nprocesses)
         tstart = datetime.utcnow()
         for process_num in range(self.nprocesses):
