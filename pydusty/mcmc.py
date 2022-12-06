@@ -39,6 +39,8 @@ class Emcee:
         self.ntrials = ntrials
         self.random_seed = random_seed
 
+        output_file_basename = os.path.basename(self.object_photometry_file) + '_results.dat'
+        self.outfilename = f'{self.dusty.dusty_working_directory}/{output_file_basename}'
         self.variable_parameters = [x for x in self.dusty.parameters if x.is_variable]
         self.constant_parameters = [x for x in self.dusty.parameters if not x.is_variable]
         self.ndim = len(self.variable_parameters)
@@ -301,12 +303,19 @@ class Emcee:
         variable_parameter_initpos = [x.value for x in self.variable_parameters]
         variable_parameter_initpos_nwalkers = np.array([x.prior.get_samples(nsamples=self.nwalkers) for x in self.variable_parameters]).T
 
-        output_file_basename = os.path.basename(self.object_photometry_file) + '_results.dat'
-        outfilename = f'{self.dusty.dusty_working_directory}/{output_file_basename}'
         if not self.continue_from_file:
-            f = open(outfilename, "w")
-            f.write(f'#Initial points {variable_parameter_initpos_nwalkers}\n')
-            f.write(f'#Priors on {variable_parameter_names} {variable_parameter_pritypes} {variable_parameter_priparams}\n')
+            f = open(self.outfilename, "w")
+            f.write(f'#Initial points\n')
+            for initpos in variable_parameter_initpos_nwalkers:
+                f.write(f'# {initpos}\n')
+            f.write(f'#Variables: {variable_parameter_names}\n')
+            f.write(f'#Priors: {variable_parameter_pritypes}\n')
+            f.write(f'#Prior params: {variable_parameter_priparams}\n')
+            for varname in variable_parameter_names:
+                f.write(f"{varname}\t")
+            f.write(f"log_scaling\t")
+            f.write(f"r1\t")
+            f.write(f"log_posterior\n")
             f.close()
 
         logger.info(
@@ -326,7 +335,7 @@ class Emcee:
             blobs = result.blobs
             sluml = blobs['sluml']
             r1s = blobs['r1']
-            f = open(outfilename, "a")
+            f = open(self.outfilename, "a")
             for k in range(len(position)):
                 for j in position[k]:
                     f.write('%.4f\t' % (j))

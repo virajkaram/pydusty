@@ -5,6 +5,7 @@ from pydusty.priors import UniformPrior
 from pydusty.utils import get_default_argparser, load_and_extcor_data, getLogger
 from multiprocessing import Pool
 from datetime import datetime
+from pydusty.parallel import ParallelEmceeRunner
 
 
 def run_mcmc_process(emcee_runner: Emcee):
@@ -58,40 +59,26 @@ if __name__ == '__main__':
         custom_grain_distribution=custom_grain_distribution
     )
 
-    nprocesses = args.nprocesses
-    logger.info(f"Creating {nprocesses} processes.")
-    pool = Pool(nprocesses)
-    tstart = datetime.utcnow()
     working_dir = args.workdir
 
     ext_corrected_obsdata = load_and_extcor_data(args.object_photometry_file)
 
+    parallel_emcee_runner = ParallelEmceeRunner(dusty_parameters=dusty_parameters,
+                                                nwalkers=args.nwalkers,
+                                                working_dir=working_dir,
+                                                obsdata=ext_corrected_obsdata,
+                                                object_photometry_file=args.object_photometry_file,
+                                                nprocesses=args.nprocesses,
+                                                ntrials=args.ntrials,
+                                                correct_for_molecular_absorption=args.molecular_absorption,
+                                                molecular_absorption_lookup_table_path=args.molecular_table_path,
+                                                limits_only=args.limits_only,
+                                                fixLstar=args.fixLstar,
+                                                chi_square_limits_only=args.chi_square_limits_only,
+                                                extrapolation=args.extrapolation,
+                                                continue_from_file=args.continue_from_file,
+                                                dusty_file_dir=args.dusty_file_dir,
+                                                )
+    parallel_emcee_runner.run()
+    parallel_emcee_runner.make_plots()
     emcee_runners = []
-
-    for process_num in range(nprocesses):
-        dusty_process_working_dir = working_dir + f'_{process_num}'
-        basic_dusty = Dusty(parameters=dusty_parameters,
-                            dusty_working_directory=dusty_process_working_dir,
-                            dusty_file_directory=args.dusty_file_dir
-                            )
-
-        emcee_runner = Emcee(dusty=basic_dusty,
-                             obsdata=ext_corrected_obsdata,
-                             object_photometry_file=args.object_photometry_file,
-                             nwalkers=args.nwalkers,
-                             ntrials=int(args.ntrials/nprocesses),
-                             correct_for_molecular_absorption=args.molecular_absorption,
-                             molecular_absorption_lookup_table_path=args.molecular_table_path,
-                             limits_only=args.limits_only,
-                             fixLstar=args.fixLstar,
-                             chi_square_limits_only=args.chi_square_limits_only,
-                             extrapolation=args.extrapolation,
-                             continue_from_file=args.continue_from_file,
-                             random_seed=process_num
-                             )
-
-        emcee_runners.append(emcee_runner)
-
-    pool.map(run_mcmc_process, emcee_runners)
-    tend = datetime.utcnow()
-    logger.info(f'Start {tstart}, End {tend}')
