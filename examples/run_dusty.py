@@ -1,3 +1,5 @@
+import os
+
 from pydusty.dusty import Dusty, DustyParameters
 from pydusty.parameters import Parameter
 import argparse
@@ -61,6 +63,8 @@ if __name__ == '__main__':
                          dusty_working_directory=args.workdir,
                          dusty_file_directory=args.dusty_file_dir
                          )
+
+    os.chdir(args.workdir)
     dusty_runner.generate_input()
     dusty_runner.run()
 
