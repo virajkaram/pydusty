@@ -1,6 +1,7 @@
 from pydusty.dusty import Dusty, DustyParameters
 from pydusty.parameters import Parameter
 import argparse
+from pydusty.utils import getLogger
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -12,8 +13,12 @@ if __name__ == '__main__':
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
                         help='Directory with dusty code files')
+    parser.add_argument('--loglevel', type=str, default='DEBUG', help='logging level')
+    parser.add_argument('--logfile', type=str, default=None, help='log file')
 
     args = parser.parse_args()
+
+    logger = getLogger(args.loglevel, args.logfile)
 
     tstar = Parameter(name='tstar',
                       value=args.tstar,
@@ -64,4 +69,4 @@ if __name__ == '__main__':
         f.write("lam, flux\n")
         for ind in range(len(lam)):
             f.write(f"{lam[ind]}, {flx[ind]}\n")
-            
+
