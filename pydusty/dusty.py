@@ -48,13 +48,15 @@ class BaseDusty:
         #         pd[constxnames[n]] = constx[n]
         #     print('calling dusty with tstar = %0.1f; tau = %0.2f; td = %0.1f; thick = %0.2f; E(B-V) = %0.4f' % (
         #         pd['tstar'], pd['tau'], pd['td'], pd['thick'], pd['ebv']))
+        curdir = os.getcwd()
         try:
+            os.chdir(self.dusty_working_directory)
             logger.info(f"Executing command {self.dusty_working_directory}/dusty")
             status = subprocess.run(f"{self.dusty_working_directory}/dusty", check=True, capture_output=True).stdout.decode()
         except subprocess.CalledProcessError as e:
             logger.error(e)
             raise e
-
+        os.chdir(curdir)
     def get_results(self):
         ierror = 0
         # try:
