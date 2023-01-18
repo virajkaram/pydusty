@@ -279,12 +279,12 @@ class Emcee:
         lam, flx, npt, r1, ierror = self.dusty.get_results()
 
         chi2, sluml = self.calculate_chi2(lam, flx, parameter_dict)
-
+        log_r1 = self.get_log_scaled_inner_radius(r1=r1, log_luminosity_scaling=sluml)
         log_post = chi2 + lgpri
 
         logger.info(f'log_chi2: {chi2}')
         logger.info(f'log_post: {log_post}')
-        return log_post, sluml, r1
+        return log_post, sluml, log_r1
 
     def run_mcmc(self):
         curdir = os.getcwd()
