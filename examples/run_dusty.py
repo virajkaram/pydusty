@@ -69,7 +69,7 @@ if __name__ == '__main__':
     dusty_runner.run()
 
     lam, flx, npt, r1, ierror = dusty_runner.get_results()
-    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}.dat', 'w') as f:
+    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}.dat', 'w') as f:
         f.write(f"# {r1}\n")
         f.write("lam, flux\n")
         for ind in range(len(lam)):
