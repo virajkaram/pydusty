@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import Dusty, DustyParameters
+from pydusty.dusty import DustyTau100, DustyParameters
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -59,19 +59,18 @@ if __name__ == '__main__':
         custom_grain_distribution=custom_grain_distribution
     )
 
-    dusty_runner = Dusty(parameters=dusty_parameters,
-                         dusty_working_directory=args.workdir,
-                         dusty_file_directory=args.dusty_file_dir
-                         )
+    dusty_runner = DustyTau100(parameters=dusty_parameters,
+                               dusty_working_directory=args.workdir,
+                               dusty_file_directory=args.dusty_file_dir
+                               )
 
     os.chdir(args.workdir)
     dusty_runner.generate_input()
     dusty_runner.run()
 
     lam, flx, npt, r1, ierror = dusty_runner.get_results()
-    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}.dat','w') as f:
+    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}.dat', 'w') as f:
         f.write(f"# {r1}\n")
         f.write("lam, flux\n")
         for ind in range(len(lam)):
             f.write(f"{lam[ind]}, {flx[ind]}\n")
-
