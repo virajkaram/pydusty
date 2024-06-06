@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import DustyTau100, DustyParameters
+from pydusty.dusty import Dusty, DustyParameters
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -9,6 +9,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--tstar", type=float, default=5000)
     parser.add_argument("--tau", type=float, default=50)
+    parser.add_argument("--tau_wav_micron", type=float, default=100.0,
+                        help="wavelength in um at which tau is specified")
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dtype", choices=['graphite', 'silicate'], default='graphite')
@@ -46,7 +48,8 @@ if __name__ == '__main__':
                          value=48999)
     custom_grain_distribution = Parameter(name='custom_grain_distribution',
                                           value=False)
-
+    tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
+                               is_variable=False)
     dusty_parameters = DustyParameters(
         tstar=tstar,
         tdust=tdust,
@@ -56,10 +59,11 @@ if __name__ == '__main__':
         dust_type=dust_type,
         tstarmin=tstarmin,
         tstarmax=tstarmax,
-        custom_grain_distribution=custom_grain_distribution
+        custom_grain_distribution=custom_grain_distribution,
+        tau_wavelength_microns=tau_wav_micron,
     )
 
-    dusty_runner = DustyTau100(parameters=dusty_parameters,
+    dusty_runner = Dusty(parameters=dusty_parameters,
                                dusty_working_directory=args.workdir,
                                dusty_file_directory=args.dusty_file_dir
                                )

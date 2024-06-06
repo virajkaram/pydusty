@@ -43,6 +43,8 @@ false_boolean_parameter = Parameter(name='generic_false_param', value=False, is_
 true_boolean_parameter = Parameter(name='generic_true_param', value=True, is_variable=False)
 default_tstarmin_parameter = Parameter(name='tstarmin', value=3500, is_variable=False)
 default_tstarmax_parameter = Parameter(name='tstarmax', value=48999, is_variable=False)
+default_tau_wavelength_micron_parameter = Parameter(name='tau_wav', value=0.55,
+                                                    is_variable=False)
 class DustyParameters:
     def __init__(self,
                  tstar: Parameter,
@@ -54,9 +56,10 @@ class DustyParameters:
                  tstarmin: Parameter = default_tstarmin_parameter,
                  tstarmax: Parameter = default_tstarmax_parameter,
                  custom_grain_distribution: Parameter = false_boolean_parameter,
+                 tau_wavelength_microns: Parameter = default_tau_wavelength_micron_parameter,
                  min_grain_size: Parameter = None,
                  max_grain_size: Parameter = None,
-                 ebv: Parameter = None
+                 ebv: Parameter = None,
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -70,6 +73,7 @@ class DustyParameters:
         self.min_grain_size = min_grain_size
         self.max_grain_size = max_grain_size
         self.ebv = ebv
+        self.tau_wavelength_microns = tau_wavelength_microns
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 
