@@ -68,17 +68,20 @@ class BaseDusty:
         i = 0
         with open(f'{self.file_basename}.out', 'r') as f:
             for line in f:
-                if i == 42:
+                if i in [42, 47]:
                     # print 'line read in from foo1.out:', line
-                    line_s = line.split()
-                    id = int(line_s[0])
-                    tau0 = float(line_s[1])
-                    f1 = float(line_s[2])
-                    r1 = float(line_s[3])
-                    r1torstar = float(line_s[4])
-                    theta1 = float(line_s[5])
-                    tdout = float(line_s[6])
-                    break
+                    try:
+                        line_s = line.split()
+                        id = int(line_s[0])
+                        tau0 = float(line_s[1])
+                        f1 = float(line_s[2])
+                        r1 = float(line_s[3])
+                        r1torstar = float(line_s[4])
+                        theta1 = float(line_s[5])
+                        tdout = float(line_s[6])
+                        break
+                    except ValueError:
+                        continue
                 i += 1
                 # except:
         #  ierror = 1
