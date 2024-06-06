@@ -51,6 +51,8 @@ if __name__ == '__main__':
                                           value=False)
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
+    si_abundance = Parameter(name='si', value=args.si, is_variable=False)
+    al_abundance = Parameter(name='al', value=args.al, is_variable=False)
     dusty_parameters = DustyParameters(
         tstar=tstar,
         tdust=tdust,
@@ -62,8 +64,8 @@ if __name__ == '__main__':
         tstarmax=tstarmax,
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
-        si_dl_abundance=args.si,
-        al_com_abundance=args.al
+        si_dl_abundance=si_abundance,
+        al_com_abundance=al_abundance,
     )
 
     dusty_runner = Dusty_Alumina(parameters=dusty_parameters,
