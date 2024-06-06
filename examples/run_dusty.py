@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import Dusty, DustyParameters, Dusty_Alumina
+from pydusty.dusty import Dusty, DustyParameters
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -13,8 +13,8 @@ if __name__ == '__main__':
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
-    parser.add_argument("--dtype", choices=['graphite', 'silicate',
-                                            'si+al'], default='graphite')
+    parser.add_argument("--dtype", choices=['graphite', 'silicate'],
+                        default='graphite')
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
                         help='Directory with dusty code files')
@@ -64,12 +64,7 @@ if __name__ == '__main__':
         tau_wavelength_microns=tau_wav_micron,
     )
 
-    # dusty_runner = Dusty(parameters=dusty_parameters,
-    #                            dusty_working_directory=args.workdir,
-    #                            dusty_file_directory=args.dusty_file_dir
-    #                            )
-
-    dusty_runner = Dusty_Alumina(parameters=dusty_parameters,
+    dusty_runner = Dusty(parameters=dusty_parameters,
                                dusty_working_directory=args.workdir,
                                dusty_file_directory=args.dusty_file_dir
                                )
