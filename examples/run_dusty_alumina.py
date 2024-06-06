@@ -42,7 +42,7 @@ if __name__ == '__main__':
     shell_thickness = Parameter(name='shell_thickness',
                                 value=args.thick)
     dust_type = Parameter(name='dust_type',
-                          value=args.dtype)
+                          value=f'si_{args.si}_al_{args.al}')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
