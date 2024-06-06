@@ -161,7 +161,7 @@ class Dusty_Alumina(BaseDusty):
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
         output.write(f'    x = 0.00    0.00   {self.parameters.si_dl_abundance.value}    0.00    0.00    0.00 \n')
         output.write('Number of additional components = 1, properties listed in:\n')
-        output.write('Al2O3-comp.nk\n')
+        output.write('Al2O3-por.nk\n')
         output.write(f'Abundances for these components = {self.parameters.al_com_abundance.value} \n')
         if self.parameters.custom_grain_distribution.value:
             output.write('- size distribution = 2  % custom       \n')
