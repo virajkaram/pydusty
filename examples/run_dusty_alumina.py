@@ -15,6 +15,8 @@ if __name__ == '__main__':
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--si", type=float, default=0.5)
     parser.add_argument("--al", type=float, default=0.5)
+    parser.add_argument("--al_type", type=str, default="compact",
+                        choices=['compact', 'porous'])
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
                         help='Directory with dusty code files')
@@ -42,7 +44,7 @@ if __name__ == '__main__':
     shell_thickness = Parameter(name='shell_thickness',
                                 value=args.thick)
     dust_type = Parameter(name='dust_type',
-                          value=f'si_{args.si}_al_{args.al}')
+                          value=f'si_{args.si}_al_{args.al}_{args.al_type}')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
