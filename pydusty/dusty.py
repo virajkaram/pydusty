@@ -120,7 +120,7 @@ class Dusty(BaseDusty):
         output.write(f'- shells relative thickness = {self.parameters.shell_thickness.value}\n')
         output.write('- power = 2 \n')
         output.write('- grid type = 1                  % linear grid \n')
-        output.write(f'- lambda0 = {self.parameters.tau_wavelength_microns} micron          % optical depth specified  \n')
+        output.write(f'- lambda0 = {self.parameters.tau_wavelength_microns.value} micron          % optical depth specified  \n')
         output.write('- tau(min) = ' + str(
             self.parameters.tau.value) + ' ; tau(max) = 1000.0   % for the visual wavelength \n')
         output.write('- number of models = 1           \n')
