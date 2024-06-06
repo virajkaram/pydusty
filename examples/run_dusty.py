@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import Dusty, DustyParameters
+from pydusty.dusty import Dusty, DustyParameters, Dusty_Alumina
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -63,7 +63,12 @@ if __name__ == '__main__':
         tau_wavelength_microns=tau_wav_micron,
     )
 
-    dusty_runner = Dusty(parameters=dusty_parameters,
+    # dusty_runner = Dusty(parameters=dusty_parameters,
+    #                            dusty_working_directory=args.workdir,
+    #                            dusty_file_directory=args.dusty_file_dir
+    #                            )
+
+    dusty_runner = Dusty_Alumina(parameters=dusty_parameters,
                                dusty_working_directory=args.workdir,
                                dusty_file_directory=args.dusty_file_dir
                                )
