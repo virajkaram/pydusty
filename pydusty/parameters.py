@@ -60,6 +60,8 @@ class DustyParameters:
                  min_grain_size: Parameter = None,
                  max_grain_size: Parameter = None,
                  ebv: Parameter = None,
+                 si_dl_abundance: Parameter = None,
+                 al_com_abundance: Parameter = None,
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -74,6 +76,8 @@ class DustyParameters:
         self.max_grain_size = max_grain_size
         self.ebv = ebv
         self.tau_wavelength_microns = tau_wavelength_microns
+        self.si_dl_abundance = si_dl_abundance
+        self.al_com_abundance = al_com_abundance
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 

@@ -144,7 +144,8 @@ class Dusty(BaseDusty):
 class Dusty_Alumina(BaseDusty):
 
     def generate_input(self):
-
+        assert self.parameters.si_dl_abundance is not None, "Silicate abundance must be specified"
+        assert self.parameters.al_com_abundance is not None, "Alumina abundance must be specified"
         output = open(f'{self.file_basename}.inp', 'w')
 
         if (self.parameters.tstar.value < self.parameters.tstarmin.value or self.parameters.tstar.value > self.parameters.tstarmax.value) or (
@@ -158,10 +159,10 @@ class Dusty_Alumina(BaseDusty):
         output.write('   optical properties index = 2 \n')
         output.write('Abundances for supported grain types:\n')
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
-        output.write('    x = 0.00    0.00   0.50    0.00    0.00    0.00 \n')
+        output.write(f'    x = 0.00    0.00   {self.parameters.si_dl_abundance.value}    0.00    0.00    0.00 \n')
         output.write('Number of additional components = 1, properties listed in:\n')
         output.write('Al2O3-comp.nk\n')
-        output.write('Abundances for these components = 0.5 \n')
+        output.write(f'Abundances for these components = {self.parameters.al_com_abundance.value} \n')
         if self.parameters.custom_grain_distribution.value:
             output.write('- size distribution = 2  % custom       \n')
             output.write(f'  q = 3.5, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
