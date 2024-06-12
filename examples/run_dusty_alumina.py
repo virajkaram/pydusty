@@ -35,10 +35,6 @@ if __name__ == '__main__':
                       value=args.tdust,
                       is_variable=True)
 
-    tau = Parameter(name='tau',
-                    value=args.tau,
-                    is_variable=False)
-
     blackbody = Parameter(name='blackbody',
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',
@@ -53,6 +49,11 @@ if __name__ == '__main__':
                                           value=False)
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
+
+    tau = Parameter(name=f'tau_{args.tau_wav_micron}um',
+                    value=args.tau,
+                    is_variable=False)
+
     si_abundance = Parameter(name='si', value=args.si, is_variable=False)
     al_abundance = Parameter(name='al', value=args.al, is_variable=False)
     dusty_parameters = DustyParameters(
