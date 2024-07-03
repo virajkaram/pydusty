@@ -1,7 +1,7 @@
 import os.path
 
 from pydusty.mcmc import Emcee
-from pydusty.dusty import Dusty
+from pydusty.dusty import Dusty, BaseDusty
 from multiprocessing import Pool
 from pydusty.parameters import DustyParameters
 from datetime import datetime
@@ -29,7 +29,8 @@ class ParallelEmceeRunner:
                  chi_square_limits_only: float = 4,
                  extrapolation: bool = False,
                  continue_from_file: bool = False,
-                 dusty_file_dir: str = 'data/dusty_files'
+                 dusty_file_dir: str = 'data/dusty_files',
+                 dusty: BaseDusty = Dusty,
                  ):
         self.nwalkers = nwalkers
         self.dusty_parameters = dusty_parameters
@@ -47,6 +48,7 @@ class ParallelEmceeRunner:
         self.nprocesses = nprocesses
         self.dusty_file_dir = dusty_file_dir
         self.emcee_runners = []
+        self.dusty = dusty
         self.full_results_filename = ''
 
     @staticmethod
@@ -59,7 +61,7 @@ class ParallelEmceeRunner:
         tstart = datetime.utcnow()
         for process_num in range(self.nprocesses):
             dusty_process_working_dir = self.working_dir + f'_{process_num}'
-            basic_dusty = Dusty(parameters=self.dusty_parameters,
+            basic_dusty = self.dusty(parameters=self.dusty_parameters,
                                 dusty_working_directory=dusty_process_working_dir,
                                 dusty_file_directory=self.dusty_file_dir
                                 )
