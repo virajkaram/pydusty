@@ -26,8 +26,8 @@ if __name__ == '__main__':
                       is_variable=False)
 
     tau = Parameter(name='tau',
-                    value=1,
-                    prior=UniformPrior(prior_parameters=(1e-3, 7)),
+                    value=0.05,
+                    prior=UniformPrior(prior_parameters=(1e-3, 0.5)),
                     is_variable=True)
 
     tau_wav_micron = Parameter(name='tau_wav', value=100,
