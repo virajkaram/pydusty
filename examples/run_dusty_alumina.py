@@ -13,8 +13,8 @@ if __name__ == '__main__':
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
-    parser.add_argument("--si", type=float, default=0.5)
-    parser.add_argument("--al", type=float, default=0.5)
+    parser.add_argument("--al", type=float, default=0.5,
+                        help="Aluminum abundance, Silicon abundance is 1-al")
     parser.add_argument("--al_type", type=str, default="compact",
                         choices=['compact', 'porous'])
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     shell_thickness = Parameter(name='shell_thickness',
                                 value=args.thick)
     dust_type = Parameter(name='dust_type',
-                          value=f'si_{args.si}_al_{args.al}_'
+                          value=f'si_{(1-args.al)}_al_{args.al}_'
                                 f'{args.al_type}_tau_{args.tau_wav_micron}um')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
@@ -55,7 +55,6 @@ if __name__ == '__main__':
                     value=args.tau,
                     is_variable=False)
 
-    si_abundance = Parameter(name='si', value=args.si, is_variable=False)
     al_abundance = Parameter(name='al', value=args.al, is_variable=False)
     dusty_parameters = DustyParameters(
         tstar=tstar,
@@ -68,7 +67,6 @@ if __name__ == '__main__':
         tstarmax=tstarmax,
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
-        si_dl_abundance=si_abundance,
         al_com_abundance=al_abundance,
     )
 
