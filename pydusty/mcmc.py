@@ -5,6 +5,7 @@ from pydusty.utils import calculate_molecular_absorption_fractions
 import emcee
 import os
 from pydusty.dusty import Dusty
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -328,7 +329,7 @@ class Emcee:
         # logger.info(sampler.random_state)
         # sampler.random_state.setter(state.get_state)
 
-        for result in sampler.sample(variable_parameter_initpos_nwalkers, iterations=self.ntrials, progress=True, store=True):
+        for result in tqdm(sampler.sample(variable_parameter_initpos_nwalkers, iterations=self.ntrials, progress=True, store=True)):
             print(os.getcwd())
             position = result.coords
             lp = result.log_prob
