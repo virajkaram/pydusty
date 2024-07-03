@@ -144,7 +144,6 @@ class Dusty(BaseDusty):
 class Dusty_Alumina(BaseDusty):
 
     def generate_input(self):
-        assert self.parameters.si_dl_abundance is not None, "Silicate abundance must be specified"
         assert self.parameters.al_com_abundance is not None, "Alumina abundance must be specified"
         output = open(f'{self.file_basename}.inp', 'w')
 
@@ -159,7 +158,7 @@ class Dusty_Alumina(BaseDusty):
         output.write('   optical properties index = 2 \n')
         output.write('Abundances for supported grain types:\n')
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
-        output.write(f'    x = 0.00    0.00   {self.parameters.si_dl_abundance.value}    0.00    0.00    0.00 \n')
+        output.write(f'    x = 0.00    0.00   {1 - self.parameters.al_com_abundance.value}    0.00    0.00    0.00 \n')
         output.write('Number of additional components = 1, properties listed in:\n')
         output.write('Al2O3-comp.nk\n')
         output.write(f'Abundances for these components = {self.parameters.al_com_abundance.value} \n')
