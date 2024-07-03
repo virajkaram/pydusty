@@ -51,10 +51,6 @@ if __name__ == '__main__':
     custom_grain_distribution = Parameter(name='custom_grain_distribution',
                                           value=False)
 
-    si_abundance = Parameter(name='si', value=0.5,
-                             prior=UniformPrior(prior_parameters=(0,1)),
-                             is_variable=True)
-
     al_abundance = Parameter(name='al', value=0.5,
                              prior=UniformPrior(prior_parameters=(0,1)),
                              is_variable=True)
@@ -70,7 +66,6 @@ if __name__ == '__main__':
         tstarmax=tstarmax,
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
-        si_dl_abundance=si_abundance,
         al_com_abundance=al_abundance,
     )
 
