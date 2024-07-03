@@ -23,7 +23,9 @@ if __name__ == '__main__':
 
     tdust = Parameter(name='tdust',
                       value=1100,
-                      is_variable=False)
+                      is_variable=True,
+                      prior=UniformPrior(prior_parameters=(700, 1500))
+                      )
 
     tau = Parameter(name='tau',
                     value=0.05,
