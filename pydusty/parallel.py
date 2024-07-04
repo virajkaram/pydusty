@@ -102,6 +102,6 @@ class ParallelEmceeRunner:
 
         plotfile_basename = os.path.basename(self.object_photometry_file).replace('.dat','.pdf')
         plotfilename = os.path.join(self.working_dir, plotfile_basename)
-        chains.drop_columns(['log_scaling', 'r1', 'log_posterior'])
+        chains.remove_columns(['log_scaling', 'r1', 'log_posterior'])
         make_corner_plot(chains, savefilename=plotfilename)
 
