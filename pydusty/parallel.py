@@ -94,7 +94,7 @@ class ParallelEmceeRunner:
 
         full_results_basename = os.path.basename(self.object_photometry_file)+'_full_results.dat'
         self.full_results_filename = os.path.join(self.working_dir, full_results_basename)
-        result.write(self.full_results_filename, format='csv')
+        result.write(self.full_results_filename, format='csv', overwrite=True)
 
     def make_plots(self):
         self.write_results_file()
