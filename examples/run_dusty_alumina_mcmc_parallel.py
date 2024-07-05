@@ -18,9 +18,9 @@ if __name__ == '__main__':
 
     # Set initial parameters
     tstar = Parameter(name='tstar',
-                      value=5000,
+                      value=3000,
                       is_variable=True,
-                      prior=UniformPrior(prior_parameters=(2000, 8000)),
+                      prior=UniformPrior(prior_parameters=(1000, 6000)),
                       )
 
     tdust = Parameter(name='tdust',
