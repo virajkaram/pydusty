@@ -2,6 +2,7 @@ import os
 import logging
 from pydusty.parameters import DustyParameters
 from astropy.io import ascii
+from glob import glob
 import subprocess
 
 logger = logging.getLogger(__name__)
@@ -32,6 +33,12 @@ class BaseDusty:
             if not os.path.exists(filepath):
                 err = f'Required dusty file : {filepath} not found in dusty_file_directory {self.dusty_file_directory}'
                 raise ValueError(err)
+
+        dusty_files = glob(f'{self.dusty_file_directory}/*')
+        logger.info(f'Copying following files from {self.dusty_file_directory} '
+                    f'to {self.dusty_working_directory}')
+        logger.info(f'{dusty_files}')
+        for filepath in dusty_files:
             os.system(f'cp {filepath} {self.dusty_working_directory}/')
 
         logger.info(f'Copied dusty files to {self.dusty_working_directory}')
