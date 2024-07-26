@@ -41,7 +41,7 @@ if __name__ == '__main__':
                           value=True)
 
     shell_thickness = Parameter(name='shell_thickness',
-                                value=2.0, is_variable=False)
+                                value=5.0, is_variable=False)
 
     dust_type = Parameter(name='dust_type',
                           value=f'si_al_tau_{tau_wav_micron.value}um')

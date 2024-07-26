@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
     shell_thickness = Parameter(name='shell_thickness',
                                 value=2.0, is_variable=True,
-                                prior=UniformPrior(prior_parameters=(1, 20))
+                                prior=UniformPrior(prior_parameters=(1, 10))
                                 )
 
     dust_type = Parameter(name='dust_type',
