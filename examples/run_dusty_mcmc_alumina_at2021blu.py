@@ -60,8 +60,10 @@ if __name__ == '__main__':
                              is_variable=True)
 
     error_underestimate_scale_factor = Parameter(name='error_underestimate_scale_factor',
-                                                 value=0.1,
-                                                 prior=GaussianPrior(prior_parameters=(0.2, 0.02)),
+                                                 value=0.2,
+                                                 prior=GaussianPrior(
+                                                     prior_parameters=(0.2, 0.02)
+                                                 ),
                                                  is_variable=True
                                                  )
     dusty_parameters = DustyParameters(
