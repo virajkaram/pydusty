@@ -60,9 +60,9 @@ if __name__ == '__main__':
                              is_variable=True)
 
     error_underestimate_scale_factor = Parameter(name='error_underestimate_scale_factor',
-                                                 value=0.2,
-                                                 prior=GaussianPrior(
-                                                     prior_parameters=(0.2, 0.02)
+                                                 value=0.15,
+                                                 prior=UniformPrior(
+                                                     prior_parameters=(0.05, 0.3)
                                                  ),
                                                  is_variable=True
                                                  )
