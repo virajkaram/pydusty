@@ -319,8 +319,8 @@ class Emcee:
         if not self.continue_from_file:
             f = open(self.outfilename, "w")
             f.write(f'#Initial points\n')
-            for initpos in variable_parameter_initpos_nwalkers:
-                f.write(f'# {initpos}\n')
+            # for initpos in variable_parameter_initpos_nwalkers:
+            #     f.write(f'# {initpos}\n')
             f.write(f'#Variables: {variable_parameter_names}\n')
             f.write(f'#Priors: {variable_parameter_pritypes}\n')
             f.write(f'#Prior params: {variable_parameter_priparams}\n')
