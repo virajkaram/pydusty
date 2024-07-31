@@ -59,6 +59,11 @@ if __name__ == '__main__':
                              prior=UniformPrior(prior_parameters=(0,1)),
                              is_variable=True)
 
+    error_underestimate_scale_factor = Parameter(name='error_underestimate_scale_factor',
+                                                 value=0.1,
+                                                 prior=UniformPrior(prior_parameters=(0, 1)),
+                                                 is_variable=True
+                                                 )
     dusty_parameters = DustyParameters(
         tstar=tstar,
         tdust=tdust,
@@ -71,6 +76,7 @@ if __name__ == '__main__':
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
         al_com_abundance=al_abundance,
+        error_underestimate_factor=error_underestimate_scale_factor,
     )
 
     working_dir = args.workdir
