@@ -45,6 +45,8 @@ default_tstarmin_parameter = Parameter(name='tstarmin', value=3500, is_variable=
 default_tstarmax_parameter = Parameter(name='tstarmax', value=48999, is_variable=False)
 default_tau_wavelength_micron_parameter = Parameter(name='tau_wav', value=0.55,
                                                     is_variable=False)
+default_error_underestimate_factor = Parameter(name='error_underestimate_factor', value=0.0,
+                                               is_variable=False)
 class DustyParameters:
     def __init__(self,
                  tstar: Parameter,
@@ -62,6 +64,7 @@ class DustyParameters:
                  ebv: Parameter = None,
                  si_dl_abundance: Parameter = None,
                  al_com_abundance: Parameter = None,
+                 error_underestimate_factor: Parameter = default_error_underestimate_factor
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -78,6 +81,7 @@ class DustyParameters:
         self.tau_wavelength_microns = tau_wavelength_microns
         self.si_dl_abundance = si_dl_abundance
         self.al_com_abundance = al_com_abundance
+        self.error_underestimate_factor = error_underestimate_factor
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 

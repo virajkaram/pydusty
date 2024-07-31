@@ -105,7 +105,10 @@ class Emcee:
         return log_outer_radius
 
     @staticmethod
-    def calculate_luminosity_chi2(observed_fluxes, observed_fluxerrs, scaled_model_fluxes,  limits_only=False, extrapolation=False):
+    def calculate_luminosity_chi2(observed_fluxes, observed_fluxerrs,
+                                  scaled_model_fluxes,  limits_only=False,
+                                  extrapolation=False,
+                                  error_underestimation_scaling_factor=0,):
         chi_Lobs = 0
         if not extrapolation and not limits_only:
             chi_array = np.zeros(len(observed_fluxes))
@@ -113,12 +116,17 @@ class Emcee:
             limit_mask = (observed_fluxes < 0)
             detection_mask = np.invert(limit_mask)
 
-            log_observed_fluxes = np.log10(observed_fluxes)
-            log_observed_fluxerrs = observed_fluxerrs / (observed_fluxes * np.log(10))
-            log_model_fluxes = np.log10(scaled_model_fluxes)
+            # log_observed_fluxes = np.log10(observed_fluxes)
+            # log_observed_fluxerrs = observed_fluxerrs / (observed_fluxes * np.log(10))
+            # log_model_fluxes = np.log10(scaled_model_fluxes)
 
-            chi_array[detection_mask] = ((log_observed_fluxes[detection_mask] - log_model_fluxes[detection_mask])/log_observed_fluxerrs[detection_mask])**2
-            chi_array[limit_mask] = (scaled_model_fluxes[limit_mask]/observed_fluxerrs[limit_mask])**2
+            chi_array[detection_mask] = (((observed_fluxes[detection_mask]
+                                          - scaled_model_fluxes[detection_mask]))**2
+                                         /(observed_fluxerrs[detection_mask]
+                                           + error_underestimation_scaling_factor
+                                           * observed_fluxes[detection_mask])**2)
+            chi_array[limit_mask] = (scaled_model_fluxes[limit_mask]
+                                     /observed_fluxerrs[limit_mask])**2
 
             chi_Lobs = np.sum(chi_array)
             eweight = 1.0
@@ -153,11 +161,15 @@ class Emcee:
                                                                  fixLstar=self.fixLstar)
 
         scaled_model_fluxes = interpolated_model_fluxes * 10**log_luminosity_scaling
-        chi2_lum = self.calculate_luminosity_chi2(observed_fluxes=mlum,
-                                                  observed_fluxerrs=merr,
-                                                  scaled_model_fluxes=scaled_model_fluxes,
-                                                  limits_only=self.limits_only,
-                                                  extrapolation=self.extrapolation)
+        chi2_lum = self.calculate_luminosity_chi2(
+            observed_fluxes=mlum,
+            observed_fluxerrs=merr,
+            scaled_model_fluxes=scaled_model_fluxes,
+            limits_only=self.limits_only,
+            extrapolation=self.extrapolation,
+            error_underestimation_scaling_factor=
+            self.dusty.parameters.error_underestimate_factor.value
+        )
 
         return chi2_lum, log_luminosity_scaling
 
