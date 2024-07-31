@@ -1,7 +1,7 @@
 from pydusty.dusty import DustyParameters, Dusty_Alumina
 from pydusty.mcmc import Emcee
 from pydusty.parameters import Parameter
-from pydusty.priors import UniformPrior
+from pydusty.priors import UniformPrior, GaussianPrior
 from pydusty.utils import get_default_argparser, load_and_extcor_data, getLogger
 from pydusty.parallel import ParallelEmceeRunner
 
@@ -56,12 +56,12 @@ if __name__ == '__main__':
                                           value=False)
 
     al_abundance = Parameter(name='al', value=0.5,
-                             prior=UniformPrior(prior_parameters=(0,1)),
+                             prior=UniformPrior(prior_parameters=(0, 1)),
                              is_variable=True)
 
     error_underestimate_scale_factor = Parameter(name='error_underestimate_scale_factor',
                                                  value=0.1,
-                                                 prior=UniformPrior(prior_parameters=(0, 1)),
+                                                 prior=GaussianPrior(prior_parameters=(0.2, 0.02)),
                                                  is_variable=True
                                                  )
     dusty_parameters = DustyParameters(
