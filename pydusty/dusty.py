@@ -117,8 +117,14 @@ class Dusty(BaseDusty):
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
         if self.parameters.dust_type.value == 'graphite':
             output.write('    x = 0.00    0.00   0.00    1.00    0.00    0.00 \n')
-        else:
+        elif self.parameters.dust_type.value == 'silicate':
             output.write('    x = 0.00    0.00   1.00    0.00    0.00    0.00 \n')
+        elif self.parameters.dust_type.value == 'amorphous_carbon':
+            output.write('    x = 0.00    0.00   0.00    0.00    1.00    0.00 \n')
+        elif self.parameters.dust_type.value == 'silicate_carbide':
+            output.write('    x = 0.00    0.00   0.00    0.00    0.00    1.00 \n')
+        else:
+            raise ValueError(f'Unknown dust type {self.parameters.dust_type.value}')
         if self.parameters.custom_grain_distribution.value:
             output.write('- size distribution = 2  % custom       \n')
             output.write(f'  q = 3.5, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
