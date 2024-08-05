@@ -264,3 +264,75 @@ class Dusty_Two_Component_Silicate(BaseDusty):
         output.write('- visibility function at spec. wavelengths; fname.v### = 0  \n')
         output.close()
         logger.info(f"Writing dusty file with {self.parameters.get_printable_string()}")
+
+
+external_elements_filenames_dict = {'alumina': 'Al2O3-comp.nk',
+                                    'crystalline_silicate': 'crMgFeSil.nk',
+                                    'glassy_olivine': 'gloliMg50.nk',
+                                    'glassy_pyroxene': 'glpyrMg50.nk',
+                                    'feo': 'FeO.nk',
+                                    'glassy_silicate': 'glSil.nk'
+                                    }
+
+
+class Dusty_Multi_Composition(BaseDusty):
+
+    def generate_input(self):
+        inbuilt_abundances = {}
+        for elem in ['silow', 'siloc', 'sildl', 'grfdl', 'amchn', 'sicpg']:
+            inbuilt_abundances[elem] = 0
+            if elem in self.parameters.abundances_dict.keys():
+                inbuilt_abundances[elem] = self.parameters.abundances_dict[elem]
+
+        external_abundances = {}
+        for elem in self.parameters.abundances_dict.keys():
+            if elem not in inbuilt_abundances.keys():
+                external_abundances[elem] = self.parameters.abundances_dict[elem]
+
+        output = open(f'{self.file_basename}.inp', 'w')
+
+        if (self.parameters.tstar.value < self.parameters.tstarmin.value or self.parameters.tstar.value > self.parameters.tstarmax.value) or (
+        self.parameters.blackbody.value):
+            output.write('Spectrum = 1\n')
+            output.write('Number of BB = 1\n')
+            output.write(f'Temperature = {round(self.parameters.tstar.value, 2)}\n')
+        else:
+            output.write('Spectrum = 5   \n')
+            output.write('\n')
+        output.write('   optical properties index = 2 \n')
+        output.write('Abundances for supported grain types:\n')
+        output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
+        output.write(f"    x = {inbuilt_abundances['silow']}    {inbuilt_abundances['siloc']}   {inbuilt_abundances['sildl']}    {inbuilt_abundances['grfdl']}    {inbuilt_abundances['amchn']}    {inbuilt_abundances['sicpg']} \n")
+        if len(external_abundances) > 0:
+            output.write(f'Number of additional components = {len(external_abundances)}, properties listed in:\n')
+            for external_elem in external_abundances.keys():
+                dust_comp_file = external_elements_filenames_dict[external_elem]
+                output.write(f'{dust_comp_file}\n')
+            output.write(f'''Abundances for these components = {", ".join([str(x) for x in external_abundances.values()])} \n''')
+        if self.parameters.custom_grain_distribution.value:
+            output.write('- size distribution = 2  % custom       \n')
+            output.write(f'  q = 3.5, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
+        else:
+            output.write('- size distribution = 1  % standard MRN    \n')
+        output.write(f'- temperature = {self.parameters.tdust.value} K \n')
+        output.write('- density type = 1                   \n')
+        output.write('- number of powers = 1              \n')
+        output.write(f'- shells relative thickness = {self.parameters.shell_thickness.value}\n')
+        output.write('- power = 2 \n')
+        output.write('- grid type = 1                  % linear grid \n')
+        output.write(f'- lambda0 = {self.parameters.tau_wavelength_microns.value} micron          % optical depth specified  \n')
+        output.write('- tau(min) = ' + str(
+            self.parameters.tau.value) + ' ; tau(max) = 1000.0   % for the visual wavelength \n')
+        output.write('- number of models = 1           \n')
+        output.write('- accuracy for flux conservation = 0.05             \n')
+        output.write('- verbosity flag;                              verbose = 1  \n')
+        output.write('- properties of emerging spectra;            fname.spp = 1  \n')
+        output.write('- detailed spectra for each model;          fname.s### = 1  \n')
+        output.write('- images at specified wavelengths;          fname.i### = 1  \n')
+        output.write('     number of wavelengths = 5  \n')
+        output.write('     wavelengths = 3.5, 4.5, 6.0, 8.0, 24.0 micron  \n')
+        output.write('- radial profiles for each model;           fname.r### = 1  \n')
+        output.write('- detailed run-time messages;               fname.m### = 1  \n')
+        output.write('- visibility function at spec. wavelengths; fname.v### = 0  \n')
+        output.close()
+        logger.info(f"Writing dusty file with {self.parameters.get_printable_string()}")

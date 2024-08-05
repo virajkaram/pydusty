@@ -64,7 +64,9 @@ class DustyParameters:
                  ebv: Parameter = None,
                  si_dl_abundance: Parameter = None,
                  al_com_abundance: Parameter = None,
-                 error_underestimate_factor: Parameter = default_error_underestimate_factor
+                 error_underestimate_factor: Parameter = default_error_underestimate_factor,
+                 dust_composition_elements: list[str] = None,
+                 dust_composition_abundances: list[float] = None,
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -96,6 +98,16 @@ class DustyParameters:
         self.parameter_dictionary = vars(self)
         self.parameter_list = [self.parameter_dictionary[x] for x in self.parameter_dictionary.keys() if isinstance(self.parameter_dictionary[x], Parameter)]
 
+        self.abundances_dict = {}
+        if dust_composition_abundances is not None:
+            if dust_composition_elements is None:
+                err = 'dust_composition_abundances specified without dust_composition_elements'
+                raise ValueError(err)
+            if len(dust_composition_elements) != len(dust_composition_abundances):
+                err = 'dust_composition_elements and dust_composition_abundances must be the same length'
+                raise ValueError(err)
+            for i in range(len(dust_composition_elements)):
+                self.abundances_dict[dust_composition_elements[i]] = dust_composition_abundances[i]
         # logger.debug(self.parameter_dictionary)
         # logger.debug(self.parameter_list)
 
