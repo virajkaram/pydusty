@@ -15,7 +15,6 @@ if __name__ == '__main__':
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dust_types", nargs="+")
     parser.add_argument("--dust_abundances", nargs="+")
-    parser.add_argument('--sil_abundance', type=float, default=0.5)
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
                         help='Directory with dusty code files')
@@ -42,9 +41,12 @@ if __name__ == '__main__':
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',
                                 value=args.thick)
+
+    dust_name = ''
+    for i in range(len(args.dust_types)):
+        dust_name += f'{args.dust_types[i]}_{args.dust_abundances[i]}_'
     dust_type = Parameter(name='dust_type',
-                          value=f'si_{(args.sil_abundance)}_{args.dtype}_{1 - args.sil_abundance}_'
-                                f'_tau_{args.tau_wav_micron}um')
+                          value=f'{dust_name}tau_{args.tau_wav_micron}um')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
