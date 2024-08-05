@@ -1,5 +1,6 @@
 import os
 import logging
+import numpy as np
 from pydusty.parameters import DustyParameters
 from astropy.io import ascii
 from glob import glob
@@ -64,6 +65,7 @@ class BaseDusty:
             logger.error(e)
             raise e
         os.chdir(curdir)
+
     def get_results(self):
         ierror = 0
         # try:
@@ -74,28 +76,21 @@ class BaseDusty:
 
         i = 0
         with open(f'{self.file_basename}.out', 'r') as f:
-            for line in f:
-                if i in [42, 47]:
-                    # print 'line read in from foo1.out:', line
-                    try:
-                        line_s = line.split()
-                        id = int(line_s[0])
-                        tau0 = float(line_s[1])
-                        f1 = float(line_s[2])
-                        r1 = float(line_s[3])
-                        r1torstar = float(line_s[4])
-                        theta1 = float(line_s[5])
-                        tdout = float(line_s[6])
-                        break
-                    except ValueError:
-                        continue
-                i += 1
-                # except:
-        #  ierror = 1
-        #  lam = np.nan
-        #  flx = np.nan
-        #  npt = np.nan
-        #  r1 = np.nan
+            lines = f.readlines()
+        lines = np.array(lines)
+        mask = np.array(['RESULTS:' in x for x in lines])
+        result_ind = np.where(mask)[0][0]
+        result_line = lines[result_ind+5]
+
+        line_s = result_line.split()
+        id = int(line_s[0])
+        tau0 = float(line_s[1])
+        f1 = float(line_s[2])
+        r1 = float(line_s[3])
+        r1torstar = float(line_s[4])
+        theta1 = float(line_s[5])
+        tdout = float(line_s[6])
+
         return lam, flx, npt, r1, ierror
 
 
