@@ -50,7 +50,7 @@ if __name__ == '__main__':
                                 value=args.thick)
     dust_type = Parameter(name='dust_type',
                           value=f'si_{(1 - args.sil_abundance)}_{args.dtype}_{args.sil_abundance}_'
-                                f'{args.al_type}_tau_{args.tau_wav_micron}um')
+                                f'_tau_{args.tau_wav_micron}um')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
