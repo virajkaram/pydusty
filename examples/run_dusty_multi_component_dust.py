@@ -56,9 +56,6 @@ if __name__ == '__main__':
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
 
-    second_comp_abundance = Parameter(name=args.dtype, value=1 - args.sil_abundance,
-                                      is_variable=False)
-
     dusty_parameters = DustyParameters(
         tstar=tstar,
         tdust=tdust,
