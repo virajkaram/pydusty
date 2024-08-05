@@ -213,7 +213,7 @@ class Dusty_Two_Component_Silicate(BaseDusty):
         if self.parameters.al_com_abundance.name == 'alumina':
             dust_comp_file = 'Al2O3-comp.nk'
         elif self.parameters.al_com_abundance.name == 'crystaline_silicate':
-            dust_comp_file = 'crSil.nk'
+            dust_comp_file = 'crMgFeSil.nk'
         elif self.parameters.al_com_abundance.name == 'glassy_olivine':
             dust_comp_file = 'gloliMg50.nk'
         elif self.parameters.al_com_abundance.name == 'glassy_pyroxene':
