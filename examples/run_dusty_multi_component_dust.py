@@ -70,7 +70,6 @@ if __name__ == '__main__':
         tstarmax=tstarmax,
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
-        al_com_abundance=second_comp_abundance,
         dust_composition_elements=args.dust_types,
         dust_composition_abundances=args.dust_abundances,
     )
