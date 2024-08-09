@@ -63,9 +63,9 @@ if __name__ == '__main__':
     )
 
     dusty_runner = DustyWaterVapor(parameters=dusty_parameters,
-                         dusty_working_directory=args.workdir,
-                         dusty_file_directory=args.dusty_file_dir
-                         )
+                                   dusty_working_directory=args.workdir,
+                                   dusty_file_directory=args.dusty_file_dir
+                                   )
 
     os.chdir(args.workdir)
     dusty_runner.generate_input()
