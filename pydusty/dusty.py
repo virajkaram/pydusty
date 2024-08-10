@@ -349,11 +349,6 @@ class DustyWaterVapor(BaseDusty):
             output.write('\n')
         output.write('   optical properties index = 3; cross-sections entered in file \n')
         output.write('   water_vapor_crosssec_dusty.dat\n')
-        if self.parameters.custom_grain_distribution.value:
-            output.write('- size distribution = 2  % custom       \n')
-            output.write(f'  q = 3.5, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
-        else:
-            output.write('- size distribution = 1  % standard MRN    \n')
         output.write(f'- temperature = {self.parameters.tdust.value} K \n')
         output.write('- density type = 1                   \n')
         output.write('- number of powers = 1              \n')
