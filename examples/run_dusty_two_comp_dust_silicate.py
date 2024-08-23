@@ -18,7 +18,7 @@ if __name__ == '__main__':
                                             'glassy_silicate',
                                             'glassy_olivine',
                                             'glassy_pyroxene',
-                                            'foe'
+                                            'feo'
                                             ],
                         )
     parser.add_argument('--sil_abundance', type=float, default=0.5)
