@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import DustyParameters, Dusty_Alumina
+from pydusty.dusty import DustyParameters, Dusty_Alumina_SilDL
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     shell_thickness = Parameter(name='shell_thickness',
                                 value=args.thick)
     dust_type = Parameter(name='dust_type',
-                          value=f'si_{(1-args.al)}_al_{args.al}_'
+                          value=f'si_{(1 - args.al)}_al_{args.al}_'
                                 f'{args.al_type}_tau_{args.tau_wav_micron}um')
     tstarmin = Parameter(name='tstarmin',
                          value=3500)
@@ -70,10 +70,10 @@ if __name__ == '__main__':
         al_com_abundance=al_abundance,
     )
 
-    dusty_runner = Dusty_Alumina(parameters=dusty_parameters,
-                                 dusty_working_directory=args.workdir,
-                                 dusty_file_directory=args.dusty_file_dir
-                                 )
+    dusty_runner = Dusty_Alumina_SilDL(parameters=dusty_parameters,
+                                       dusty_working_directory=args.workdir,
+                                       dusty_file_directory=args.dusty_file_dir
+                                       )
 
     os.chdir(args.workdir)
     dusty_runner.generate_input()
