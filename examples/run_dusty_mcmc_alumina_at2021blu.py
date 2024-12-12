@@ -1,4 +1,4 @@
-from pydusty.dusty import DustyParameters, Dusty_Alumina
+from pydusty.dusty import DustyParameters, Dusty_Alumina_SilOW
 from pydusty.mcmc import Emcee
 from pydusty.parameters import Parameter
 from pydusty.priors import UniformPrior, GaussianPrior
@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
     ext_corrected_obsdata = load_and_extcor_data(args.object_photometry_file)
 
-    parallel_emcee_runner = ParallelEmceeRunner(dusty=Dusty_Alumina,
+    parallel_emcee_runner = ParallelEmceeRunner(dusty=Dusty_Alumina_SilOW,
                                                 dusty_parameters=dusty_parameters,
                                                 nwalkers=args.nwalkers,
                                                 working_dir=working_dir,

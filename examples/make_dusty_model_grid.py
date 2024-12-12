@@ -1,6 +1,6 @@
 import os
 
-from pydusty.dusty import DustyParameters, Dusty_Alumina
+from pydusty.dusty import DustyParameters, Dusty_Alumina_SilDL
 from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
@@ -80,10 +80,10 @@ if __name__ == '__main__':
                     al_com_abundance=al_abundance,
                 )
 
-                dusty_runner = Dusty_Alumina(parameters=dusty_parameters,
-                                             dusty_working_directory=workdir,
-                                             dusty_file_directory=args.dusty_file_dir
-                                             )
+                dusty_runner = Dusty_Alumina_SilDL(parameters=dusty_parameters,
+                                                   dusty_working_directory=workdir,
+                                                   dusty_file_directory=args.dusty_file_dir
+                                                   )
 
                 os.chdir(workdir)
                 dusty_runner.generate_input()

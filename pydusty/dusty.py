@@ -149,7 +149,7 @@ class Dusty(BaseDusty):
         logger.info(f"Writing dusty file with {self.parameters.get_printable_string()}")
 
 
-class Dusty_Alumina(BaseDusty):
+class Dusty_Alumina_SilOW(BaseDusty):
 
     def generate_input(self):
         assert self.parameters.al_com_abundance is not None, "Alumina abundance must be specified"
