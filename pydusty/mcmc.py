@@ -74,9 +74,6 @@ class Emcee:
         '''
         calculate a weighted scaling
         '''
-        log_observed_fluxes = np.log10(observed_fluxes)
-        log_observed_fluxerrs = observed_fluxerrs/(observed_fluxes * np.log(10))
-        log_model_fluxes = np.log10(model_fluxes)
         if fixLstar:
             log_weighted_luminosity_scaling = fixLstar
         elif limits_only:
@@ -87,10 +84,10 @@ class Emcee:
             weighted_scaling = chi_square_limits_only/(np.sum(scalings_array))
             log_weighted_luminosity_scaling = np.log10(weighted_scaling)
         else:
-            scalings_array = np.sum((log_observed_fluxes - log_model_fluxes) / (log_observed_fluxerrs ** 2))
-            weights_array = np.sum(1 / log_observed_fluxerrs ** 2)
+            scale = (np.sum(observed_fluxes*model_fluxes/(observed_fluxerrs**2))
+                     /np.sum(model_fluxes**2/(observed_fluxerrs**2)))
 
-            log_weighted_luminosity_scaling = np.sum(scalings_array)/np.sum(weights_array)
+            log_weighted_luminosity_scaling = np.log10(scale)
 
         return log_weighted_luminosity_scaling
 
@@ -332,7 +329,7 @@ class Emcee:
             f.close()
 
         logger.info(
-            f'Running emcee by varyng parameters {variable_parameter_names} with initial values '
+            f'Running emcee by varying parameters {variable_parameter_names} with initial values '
             f'{variable_parameter_initpos} and priors {variable_parameter_priparams}')
 
         dtype = [("sluml", float), ("r1", float)]
