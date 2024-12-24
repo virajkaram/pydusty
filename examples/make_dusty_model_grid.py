@@ -5,6 +5,7 @@ from pydusty.parameters import Parameter
 import argparse
 from pydusty.utils import getLogger
 from pathlib import Path
+import numpy as np
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -28,9 +29,9 @@ if __name__ == '__main__':
     tstar_values = [1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500]
     tdust_values = [500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100,
                     1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500]
-    tau_values = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11,
-                  0.12, 0.13, 0.14, 0.15]
-
+    # tau_values = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11,
+    #               0.12, 0.13, 0.14, 0.15]
+    tau_values = 10**np.linspace(-2, 0, 15)
     blackbody = Parameter(name='blackbody',
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',

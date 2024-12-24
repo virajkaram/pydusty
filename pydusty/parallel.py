@@ -90,6 +90,7 @@ class ParallelEmceeRunner:
         result = Table()
         for emcee_runner in self.emcee_runners:
             tmp = ascii.read(emcee_runner.outfilename)
+            tmp['run'] = emcee_runner.random_seed
             result = vstack([result, tmp])
 
         full_results_basename = os.path.basename(self.object_photometry_file)+'_full_results.dat'
@@ -99,7 +100,7 @@ class ParallelEmceeRunner:
     def make_plots(self):
         self.write_results_file()
         chains = ascii.read(self.full_results_filename)
-
+        #
         plotfile_basename = os.path.basename(self.object_photometry_file).replace('.dat','.pdf')
         plotfilename = os.path.join(self.working_dir, plotfile_basename)
         chains.remove_columns(['log_scaling', 'r1', 'log_posterior'])
