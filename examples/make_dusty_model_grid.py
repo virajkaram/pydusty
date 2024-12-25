@@ -31,7 +31,7 @@ if __name__ == '__main__':
                     1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500]
     # tau_values = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11,
     #               0.12, 0.13, 0.14, 0.15]
-    tau_values = 10**np.linspace(-2, 0, 15)
+    tau_values = 10**np.linspace(0, 1, 7)
     blackbody = Parameter(name='blackbody',
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',
