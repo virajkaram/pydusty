@@ -67,6 +67,7 @@ class DustyParameters:
                  error_underestimate_factor: Parameter = default_error_underestimate_factor,
                  dust_composition_elements: list[str] = None,
                  dust_composition_abundances: list[float] = None,
+                 custom_input_spectrum_file: Parameter = None,
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -84,6 +85,7 @@ class DustyParameters:
         self.si_dl_abundance = si_dl_abundance
         self.al_com_abundance = al_com_abundance
         self.error_underestimate_factor = error_underestimate_factor
+        self.custom_input_spectrum_file = custom_input_spectrum_file
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 

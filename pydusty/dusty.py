@@ -421,3 +421,48 @@ class DustyWaterVapor(BaseDusty):
         output.write('- visibility function at spec. wavelengths; fname.v### = 0  \n')
         output.close()
         logger.info(f"Writing dusty file with {self.parameters.get_printable_string()}")
+
+
+class DustyCustomInputSpectrum(BaseDusty):
+    """
+    Custom input spectrum for dusty, requires custom_input_spectrum_file parameter to be specified
+    with the file containing the spectrum in lambda vs F_lambda format.
+    """
+
+    def generate_input(self):
+
+        if self.parameters.custom_input_spectrum_file is None:
+            raise ValueError('custom_input_spectrum_file parameter must be specified'
+                             'for DustyCustomInputSpectrum class')
+
+        if self.parameters.blackbody.value:
+            raise ValueError('Blackbody spectrum not supported for custom input spectrum')
+
+        output = open(f'{self.file_basename}.inp', 'w')
+
+        output.write('Spectrum = 5   \n')
+        output.write(f'{self.parameters.custom_input_spectrum_file.value}\n')
+        output.write('   optical properties index = 3; cross-sections entered in file \n')
+        output.write('   water_vapor_crosssec_dusty.dat\n')
+        output.write(f'- temperature = {self.parameters.tdust.value} K \n')
+        output.write('- density type = 1                   \n')
+        output.write('- number of powers = 1              \n')
+        output.write(f'- shells relative thickness = {self.parameters.shell_thickness.value}\n')
+        output.write('- power = 2 \n')
+        output.write('- grid type = 1                  % linear grid \n')
+        output.write(f'- lambda0 = {self.parameters.tau_wavelength_microns.value} micron          % optical depth specified  \n')
+        output.write('- tau(min) = ' + str(
+            self.parameters.tau.value) + ' ; tau(max) = 1000.0   % for the visual wavelength \n')
+        output.write('- number of models = 1           \n')
+        output.write('- accuracy for flux conservation = 0.05             \n')
+        output.write('- verbosity flag;                              verbose = 1  \n')
+        output.write('- properties of emerging spectra;            fname.spp = 1  \n')
+        output.write('- detailed spectra for each model;          fname.s### = 1  \n')
+        output.write('- images at specified wavelengths;          fname.i### = 1  \n')
+        output.write('     number of wavelengths = 5  \n')
+        output.write('     wavelengths = 3.5, 4.5, 6.0, 8.0, 24.0 micron  \n')
+        output.write('- radial profiles for each model;           fname.r### = 1  \n')
+        output.write('- detailed run-time messages;               fname.m### = 1  \n')
+        output.write('- visibility function at spec. wavelengths; fname.v### = 0  \n')
+        output.close()
+        logger.info(f"Writing dusty file with {self.parameters.get_printable_string()}")
