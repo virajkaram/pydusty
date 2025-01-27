@@ -49,12 +49,12 @@ default_error_underestimate_factor = Parameter(name='error_underestimate_factor'
                                                is_variable=False)
 class DustyParameters:
     def __init__(self,
-                 tstar: Parameter,
                  tdust: Parameter,
                  tau: Parameter,
                  shell_thickness: Parameter,
                  dust_type: Parameter,
                  blackbody: Parameter,
+                 tstar: Parameter = None,
                  tstarmin: Parameter = default_tstarmin_parameter,
                  tstarmax: Parameter = default_tstarmax_parameter,
                  custom_grain_distribution: Parameter = false_boolean_parameter,
