@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     # Check that we have phoenix files for each Tstar, otherwise raise an error
     for tstarval in tstar_values:
-        phoenix_file = glob(f'{phoenix_dusty_format_dirname}/dusty_phoenix*_{tstarval}.fits')
+        phoenix_file = glob(f'{phoenix_dusty_format_dirname}/dusty_phoenix*_{tstarval}.dat')
         if len(phoenix_file) == 0:
             raise FileNotFoundError(f"Could not find phoenix file for Tstar = {tstarval}"
                                     f"in directory {phoenix_dusty_format_dirname}")
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         for tdustval in tdust_values:
             for tauval in tau_values:
                 phoenix_file = glob(
-                    f'{phoenix_dusty_format_dirname}/dusty_phoenix*_{tstarval}.fits')[0]
+                    f'{phoenix_dusty_format_dirname}/dusty_phoenix*_{tstarval}.dat')[0]
                 custom_input_spectrum_file = Parameter(
                     name='custom_input_spectrum_file',
                     value=phoenix_file,
