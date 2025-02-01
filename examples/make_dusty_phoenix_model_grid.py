@@ -14,9 +14,9 @@ from astropy.convolution import Box1DKernel, convolve
 def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey='g00'):
     phnx = Table.read(phoenix_filename)
     # Restrict to wavelengths between 0.1 and 20 microns
-    phnx['wav_um'] = phnx['WAVELENGTH'] / 1e4
+    phnx['wav_um'] = phnx['WAVELENGTH'].values / 1e4
     phnx = phnx[(phnx['wav_um']>0.1) & (phnx['wav_um']<20)]
-    phnx_flx = phnx[log_gkey]
+    phnx_flx = phnx[log_gkey].values
     phnx_wavs = phnx['wav_um']
     phnx_flx /= np.nanmax(phnx_flx)
     # convolve to fewer than 10000 points
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     logger = getLogger(args.loglevel, args.logfile)
 
-    tstar_values = [2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,
+    tstar_values = [2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,
                     3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000,
                     4100, 4200, 4300, 4400, 4500
                     ]
@@ -71,7 +71,7 @@ if __name__ == '__main__':
         phoenix_filelist = glob(f"{args.phoenix_directory}/phoenix*.fits")
         for phoenix_filename in phoenix_filelist:
             convert_phoenix_file_to_dusty_format(phoenix_filename,
-                                                 f"{phoenix_dusty_format_dirname}/dusty_{Path(phoenix_filename).name}",
+                                                 f"{phoenix_dusty_format_dirname}/dusty_{Path(phoenix_filename).name.replace('.fits', '.dat')}",
                                                  log_gkey=log_gkey,
                                                  )
 
