@@ -111,11 +111,11 @@ if __name__ == '__main__':
                     is_variable=False)
 
                 tdust = Parameter(name='tdust',
-                                  value=args.tdust,
+                                  value=tdustval,
                                   is_variable=True)
 
                 tau = Parameter(name='tau',
-                                value=args.tau,
+                                value=tauval,
                                 is_variable=False)
 
                 dusty_parameters = DustyParameters(
