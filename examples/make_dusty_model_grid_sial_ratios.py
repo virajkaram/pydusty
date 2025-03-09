@@ -15,7 +15,7 @@ if __name__ == '__main__':
     parser.add_argument("--al_type", type=str, default="compact",
                         choices=['compact', 'porous'])
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
-    parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
+    parser.add_argument('--dusty_file_dir', type=str, default='/scr2/viraj/dusty/',
                         help='Directory with dusty code files')
     parser.add_argument('--loglevel', type=str, default='DEBUG', help='logging level')
     parser.add_argument('--logfile', type=str, default=None, help='log file')
@@ -40,7 +40,6 @@ if __name__ == '__main__':
                                           value=False)
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
-    al_abundance = Parameter(name='al', value=args.al, is_variable=False)
 
     workdir = args.workdir + f'/si_al_grid_thick_{shell_thickness.value}'
     Path(workdir).mkdir(parents=True, exist_ok=True)
@@ -51,6 +50,8 @@ if __name__ == '__main__':
                     dust_type = Parameter(name='dust_type',
                                           value=f'si_{round(1 - alval, 2)}_al_{alval}_'
                                                 f'{args.al_type}_tau_{args.tau_wav_micron}um')
+                    al_abundance = Parameter(name='al', value=alval,
+                                             is_variable=False)
 
                     tstar = Parameter(name='tstar',
                                       value=tstarval,
