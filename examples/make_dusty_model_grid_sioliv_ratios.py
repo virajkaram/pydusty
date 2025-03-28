@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     tstar_values = [2000, 2500, 3000, 3500, 4000, 4500]
     tdust_values = [100, 200, 300, 400, 500, 600]
-    olivine_abundances = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    olivine_abundance_values = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
     tau_values = [50, 70, 90, 110, 130, 150]
     blackbody = Parameter(name='blackbody',
                           value=True)
@@ -44,11 +44,11 @@ if __name__ == '__main__':
     for tstarval in tstar_values:
         for tdustval in tdust_values:
             for tauval in tau_values:
-                for olval in olivine_abundances:
+                for olval in olivine_abundance_values:
                     dust_type = Parameter(name='dust_type',
                                           value=f'si_{round(1 - olval, 2)}_oliv_{olval}_'
                                                 f'glassy_tau_{args.tau_wav_micron}um')
-                    olivine_abundances = Parameter(name='glassy_olivine',
+                    olivine_abundance = Parameter(name='glassy_olivine',
                                                    value=olval,
                                                    is_variable=False)
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
                         tstarmax=tstarmax,
                         custom_grain_distribution=custom_grain_distribution,
                         tau_wavelength_microns=tau_wav_micron,
-                        al_com_abundance=olivine_abundances,
+                        al_com_abundance=olivine_abundance,
                     )
 
                     dusty_runner = Dusty_Two_Component_Silicate(
