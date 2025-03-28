@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
                     dusty_runner = Dusty_Two_Component_Silicate(
                         parameters=dusty_parameters,
-                        dusty_working_directory=args.workdir,
+                        dusty_working_directory=workdir,
                         dusty_file_directory=args.dusty_file_dir
                         )
 
