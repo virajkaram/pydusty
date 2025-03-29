@@ -23,7 +23,7 @@ if __name__ == '__main__':
     logger = getLogger(args.loglevel, args.logfile)
 
     # tstar_values = [2000, 2500, 3000, 3500, 4000, 4500]
-    tstar_values = [5000, 5500]
+    tstar_values = [6000, 6500, 7000, 7500, 8000, 8500,]
     tdust_values = [100, 200, 300, 400, 500, 600]
     olivine_abundance_values = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
     tau_values = [50, 70, 90, 110, 130, 150]
