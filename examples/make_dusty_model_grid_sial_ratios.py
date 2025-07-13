@@ -9,7 +9,7 @@ import numpy as np
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tau_wav_micron", type=float, default=100.0,
+    parser.add_argument("--tau_wav_micron", type=float, default=0.55,
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--al_type", type=str, default="compact",
@@ -24,10 +24,10 @@ if __name__ == '__main__':
 
     logger = getLogger(args.loglevel, args.logfile)
 
-    tstar_values = [1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500,]
-    tdust_values = [300, 400, 500, 600, 700, 800, 900, 1000]
-    als = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-    tau_values = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,]
+    tstar_values = [2000, 2500, 3000, 3500, 4000, 4500, 5000]
+    tdust_values = [200, 300, 400, 500, 600]
+    als = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    tau_values = [50, 70, 90, 110, 130, 150]
     blackbody = Parameter(name='blackbody',
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',
