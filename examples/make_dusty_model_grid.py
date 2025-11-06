@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # tdust_values = [500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100,
     #                 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500]
     tdust_values = [100, 200, 300, 400, 500, 600, 700]
-    tau_values = 10**np.linspace(1, np.log10(500), 10)
+    tau_values =10**np.linspace(1, np.log10(500), 10)
     blackbody = Parameter(name='blackbody',
                           value=True)
     shell_thickness = Parameter(name='shell_thickness',
