@@ -118,6 +118,8 @@ class Dusty(BaseDusty):
             output.write('    x = 0.00    0.00   0.00    0.00    1.00    0.00 \n')
         elif self.parameters.dust_type.value == 'silicate_carbide':
             output.write('    x = 0.00    0.00   0.00    0.00    0.00    1.00 \n')
+        elif self.parameters.dust_type.value == 'silow':
+            output.write('    x = 1.00    0.00   0.00    0.00    0.00    0.00 \n')
         else:
             raise ValueError(f'Unknown dust type {self.parameters.dust_type.value}')
         if self.parameters.custom_grain_distribution.value:

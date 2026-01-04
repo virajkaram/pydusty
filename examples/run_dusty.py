@@ -14,7 +14,9 @@ if __name__ == '__main__':
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dtype", choices=['graphite', 'silicate',
-                                            'amorphous_carbon', 'silicate_carbide'],
+                                            'amorphous_carbon', 'silicate_carbide',
+                                            'silow'
+                                            ],
                         default='graphite')
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
