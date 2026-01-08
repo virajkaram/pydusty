@@ -174,7 +174,7 @@ class Dusty_Alumina_SilOW(BaseDusty):
         output.write(f'Abundances for these components = {self.parameters.al_com_abundance.value} \n')
         if self.parameters.custom_grain_distribution.value:
             output.write('- size distribution = 2  % custom       \n')
-            output.write(f'  q = 3.5, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
+            output.write(f'  q = 0, a(min) = {self.parameters.min_grain_size.value} micron, a(max) = {self.parameters.max_grain_size.value} micron\n')
         else:
             output.write('- size distribution = 1  % standard MRN    \n')
         output.write(f'- temperature = {self.parameters.tdust.value} K \n')
