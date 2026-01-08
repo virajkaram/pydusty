@@ -49,7 +49,6 @@ if __name__ == '__main__':
                                           value=True)
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
-    al_abundance = Parameter(name='al', value=args.al, is_variable=False)
 
     workdir = args.workdir + f'/{dust_type.value}_grain_size_Y_grid'
     Path(workdir).mkdir(parents=True, exist_ok=True)
