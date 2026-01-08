@@ -23,12 +23,12 @@ if __name__ == '__main__':
 
     logger = getLogger(args.loglevel, args.logfile)
 
-    tstar_values = [2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000,
+    tstar_values = [4000, 4500, 3500, 5000, 3000, 5500, 2500, 6000,
                     6500, 7000]
 
-    tdust_values = [300, 400, 500, 600, 700, 800, 900, 1000]
+    tdust_values = [600, 700, 500, 800, 400, 900, 300, 1000]
 
-    tau_values = [0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2]
+    tau_values = [0.1, 0.12, 0.08, 0.14, 0.06, 0.16, 0.04, 0.18, 0.02, 0.2]
 
     shell_thickness_values = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
 
@@ -97,15 +97,17 @@ if __name__ == '__main__':
                              dusty_file_directory=args.dusty_file_dir
                              )
 
+        filename = (f'{workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_'
+                    f'{grain_size.value}_{shell_thickness.value}_{dust_type.value}.dat')
+        if os.path.exists(filename):
+            continue
+            
         os.chdir(workdir)
         dusty_runner.generate_input()
         dusty_runner.run()
 
         lam, flx, npt, r1, ierror = dusty_runner.get_results()
-        with open(
-                f'{workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_'
-                f'{grain_size.value}_{shell_thickness.value}_{dust_type.value}.dat',
-                'w') as f:
+        with open(filename, 'w') as f:
             f.write(f"# {r1}\n")
             f.write("lam, flux\n")
             for ind in range(len(lam)):
