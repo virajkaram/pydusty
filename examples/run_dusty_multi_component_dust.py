@@ -56,12 +56,14 @@ if __name__ == '__main__':
     custom_grain_distribution = Parameter(name='custom_grain_distribution',
                                           value=False)
     grain_size = None
+    grain_type = Parameter(name='grain_type', value='MRN')
     if args.grain_size is not None:
         custom_grain_distribution = Parameter(name='custom_grain_distribution',
                                               value=True)
         grain_size = Parameter(name='min_grain_size',
                                 value=args.grain_size
                                    )
+        grain_type = Parameter(name='grain_type', value=f'custom_single_size_{args.grain_size}')
 
 
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
@@ -95,7 +97,7 @@ if __name__ == '__main__':
 
     lam, flx, npt, r1, ierror = dusty_runner.get_results()
     with open(
-            f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_{grain_size}.dat',
+            f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_{grain_type.value}.dat',
             'w') as f:
         f.write(f"# {r1}\n")
         f.write("lam, flux\n")
