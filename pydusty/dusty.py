@@ -338,6 +338,9 @@ class Dusty_Multi_Composition(BaseDusty):
             if elem not in inbuilt_abundances.keys():
                 external_abundances[elem] = self.parameters.abundances_dict[elem]
 
+        optical_properties_index = 1
+        if len(external_abundances) > 0:
+            optical_properties_index = 2
         output = open(f'{self.file_basename}.inp', 'w')
 
         if (self.parameters.tstar.value < self.parameters.tstarmin.value or self.parameters.tstar.value > self.parameters.tstarmax.value) or (
@@ -348,7 +351,7 @@ class Dusty_Multi_Composition(BaseDusty):
         else:
             output.write('Spectrum = 5   \n')
             output.write('\n')
-        output.write('   optical properties index = 2 \n')
+        output.write(f'   optical properties index = {optical_properties_index} \n')
         output.write('Abundances for supported grain types:\n')
         output.write('   #   Sil-Ow  Sil-Oc  Sil-DL  grf-DL  amC-Hn  SiC-Pg \n')
         output.write(f"    x = {inbuilt_abundances['silow']}    {inbuilt_abundances['siloc']}   {inbuilt_abundances['sildl']}    {inbuilt_abundances['grfdl']}    {inbuilt_abundances['amchn']}    {inbuilt_abundances['sicpg']} \n")
