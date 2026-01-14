@@ -267,6 +267,8 @@ class Dusty_Two_Component_Silicate(BaseDusty):
             dust_comp_file = 'glpyrMg50.nk'
         elif self.parameters.al_com_abundance.name == 'feo':
             dust_comp_file = 'FeO.nk'
+        elif self.parameters.al_com_abundance.name == 'glassy_silicate':
+            dust_comp_file = 'glSil.nk'
         else:
             raise ValueError(f'Unknown dust component {self.parameters.al_com_abundance.name}')
         if (self.parameters.tstar.value < self.parameters.tstarmin.value or self.parameters.tstar.value > self.parameters.tstarmax.value) or (
