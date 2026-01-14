@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dust_types", nargs="+")
+    parser.add_argument("--grain_size", type=float, default=None)
     parser.add_argument("--dust_abundances", nargs="+")
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
@@ -51,8 +52,18 @@ if __name__ == '__main__':
                          value=3500)
     tstarmax = Parameter(name='tstarmin',
                          value=48999)
+
     custom_grain_distribution = Parameter(name='custom_grain_distribution',
                                           value=False)
+    grain_size = None
+    if args.grain_size is not None:
+        custom_grain_distribution = Parameter(name='custom_grain_distribution',
+                                              value=True)
+        grain_size = Parameter(name='min_grain_size',
+                                value=args.grain_size
+                                   )
+
+
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
 
@@ -69,6 +80,8 @@ if __name__ == '__main__':
         tau_wavelength_microns=tau_wav_micron,
         dust_composition_elements=args.dust_types,
         dust_composition_abundances=args.dust_abundances,
+        min_grain_size=grain_size,
+        max_grain_size=grain_size,
     )
 
     dusty_runner = Dusty_Multi_Composition(parameters=dusty_parameters,
@@ -82,7 +95,7 @@ if __name__ == '__main__':
 
     lam, flx, npt, r1, ierror = dusty_runner.get_results()
     with open(
-            f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}.dat',
+            f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_{grain_size}.dat',
             'w') as f:
         f.write(f"# {r1}\n")
         f.write("lam, flux\n")
