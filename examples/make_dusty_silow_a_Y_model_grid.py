@@ -24,15 +24,15 @@ if __name__ == '__main__':
     logger = getLogger(args.loglevel, args.logfile)
 
     tstar_values = [4000, 4500, 3500, 5000, 3000, 5500, 2500, 6000,
-                    6500, 7000]
+                    6500,]
 
     tdust_values = [600, 700, 500, 800, 400, 900, 300, 1000]
 
     tau_values = [0.1, 0.12, 0.08, 0.14, 0.06, 0.16, 0.04, 0.18, 0.02, 0.2]
 
-    shell_thickness_values = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+    shell_thickness_values = [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 12.0, 16.0, 20.0]
 
-    a_values = [0.02, 0.04, 0.06, 0.08, 0.1]
+    a_values = [0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16]
 
     blackbody = Parameter(name='blackbody',
                           value=True)
@@ -101,7 +101,7 @@ if __name__ == '__main__':
                     f'{grain_size.value}_{shell_thickness.value}_{dust_type.value}.dat')
         if os.path.exists(filename):
             continue
-            
+
         os.chdir(workdir)
         dusty_runner.generate_input()
         dusty_runner.run()
