@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
                             dust_type_param = Parameter(name='dust_type',
                                                   value=f'silow_{si_ratio}_glsil_tau_'
-                                                        f'{1-si_ratio}_{args.tau_wav_micron}um')
+                                                        f'{1-si_ratio}_{tau_wav_micron.value}um')
 
                             dust_abundances = [si_ratio, 1 - si_ratio]
                             dust_types = ['silow', 'glassy_silicate']
