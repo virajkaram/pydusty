@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     tau_values = [0.1, 0.14, 0.06, 0.18, 0.02]
 
-    shell_thickness_values = [2.0, 5.0, 10.0, 20.0, 40.0]
+    shell_thickness_values = [2.0, 5.0, 10.0, 20.0, 40.0, 100.0]
 
     si_ratios = [0.6, 0.7, 0.8, 0.9, 1.0]
 
