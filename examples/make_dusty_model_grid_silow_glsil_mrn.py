@@ -93,7 +93,7 @@ if __name__ == '__main__':
     tau_wav_micron = Parameter(name='tau_wav', value=0.55,
                                is_variable=False)
 
-    working_dir = args.workdir + f'/silow_glsil_grain_size_Y_grid'
+    working_dir = args.workdir + f'/silow_glsil_Y_mrn_grid'
     Path(working_dir).mkdir(parents=True, exist_ok=True)
     params_list = []
     i = 0
