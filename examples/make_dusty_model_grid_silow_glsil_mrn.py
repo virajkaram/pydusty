@@ -118,8 +118,8 @@ if __name__ == '__main__':
                                                     value=shell_thickness_value)
 
                         dust_type_param = Parameter(name='dust_type',
-                                              value=f'silow_{round(si_ratio, 2.0)}_glsil_'
-                                                    f'{round(1-si_ratio, 2.0)}_tau_'
+                                              value=f'silow_{round(si_ratio, 2)}_glsil_'
+                                                    f'{round(1-si_ratio, 2)}_tau_'
                                                     f'{tau_wav_micron.value}um')
 
                         dust_abundances = [si_ratio, 1 - si_ratio]
