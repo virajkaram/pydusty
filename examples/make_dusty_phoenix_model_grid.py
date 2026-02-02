@@ -15,7 +15,7 @@ def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey
     phnx = Table.read(phoenix_filename)
     # Restrict to wavelengths between 0.1 and 20 microns
     phnx['wav_um'] = phnx['WAVELENGTH'] / 1e4
-    phnx = phnx[(phnx['wav_um']>0.1) & (phnx['wav_um']<20)]
+    phnx = phnx[(phnx['wav_um']>0.1) & (phnx['wav_um']<50)]
     phnx_flx = np.array(phnx[log_gkey])
     phnx_wavs = phnx['wav_um']
     phnx_flx /= np.nanmax(phnx_flx)
