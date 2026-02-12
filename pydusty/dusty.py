@@ -87,6 +87,7 @@ class BaseDusty:
                          f'Working dir is {self.dusty_working_directory}.'
                          f'Parameters are {self.parameters.get_printable_string()}.'
                          f'Contents of {self.file_basename}.out are :\n {lines}'
+                        f'Current dir is {os.getcwd()}'
                    )
             logger.error(err)
             raise IndexError(err)
