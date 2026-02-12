@@ -49,6 +49,20 @@ def get_extinction_corrected_fluxes(mlam, mlumobs, merrobs, ebv, rv=3.1):
     return mlum, merr
 
 
+def apply_extinction_to_fluxes(mlam, mlum, merr, ebv, rv=3.1):
+    mlum_ext = np.zeros(len(mlum))
+    merr_ext = np.zeros(len(mlum))
+    logger.debug('Extinction-applied luminosities:')
+    for i in range(len(mlam)):
+        rlval = rl(rv, 1.0 / mlam[i])
+        ecor = 10.0 ** (-0.4 * rlval * ebv)
+        mlum_ext[i] = mlum[i] * ecor
+        merr_ext[i] = merr[i] * ecor
+        logger.debug('    %s %s %s (%s)' % (mlam[i], mlum_ext[i], merr_ext[i], ecor))
+
+    return mlum_ext, merr_ext
+
+
 def extinction_correct_obsdata(obsdat, ebv, rv=3.1):
     mlam = obsdat['mlam']
     mlumobs = obsdat['mlumobs_uncor']
