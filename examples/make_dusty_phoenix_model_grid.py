@@ -36,7 +36,8 @@ def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey
 
 def run_dusty_for_params(params):
     (custom_input_spectrum_file,tstarval, tdust, tau, blackbody, shell_thickness, dust_type, tstarmin,
-     tstarmax, custom_grain_distribution, tau_wav_micron, dusty_file_dir, work_subdir) = params
+     tstarmax, custom_grain_distribution, tau_wav_micron, dusty_file_dir, work_subdir,
+     working_dir) = params
 
     dusty_parameters = DustyParameters(
         custom_input_spectrum_file=custom_input_spectrum_file,
@@ -166,12 +167,20 @@ if __name__ == '__main__':
                                 value=tauval,
                                 is_variable=False)
 
+                base_filename = (f'sed_{tstarval}_{tdust.value}_{tau.value}_'
+                                 f'{dust_type.value}_{shell_thickness.value}_{tau_wav_micron.value}um.dat')
+
+                if len(glob(f'{working_dir}/*/{base_filename}')) > 0:
+                    continue
+
                 i += 1
                 work_subdir = f'{working_dir}/{i % ncpus}'
                 params_list.append([custom_input_spectrum_file, tstarval, tdust, tau,
                                     blackbody, shell_thickness, dust_type, tstarmin,
                                     tstarmax, custom_grain_distribution, tau_wav_micron,
                                     args.dusty_file_dir,
-                                    work_subdir,])
+                                    work_subdir, working_dir])
+
+    print(f"Running dusty for {len(params_list)} sets of parameters using {ncpus} CPUs")
     pool =  Pool(processes=ncpus)
     pool.map(run_dusty_for_params, params_list)
