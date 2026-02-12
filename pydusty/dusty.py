@@ -82,10 +82,11 @@ class BaseDusty:
         try:
             result_ind = np.where(mask)[0][0]
         except IndexError:
-            logger.error(f'No RESULTS line found in {self.file_basename}.out. '
+            err = (f'No RESULTS line found in {self.file_basename}.out. '
                          f'Returning ierror = 1'
                          f'Working dir is {self.dusty_working_directory}')
-            raise IndexError
+            logger.error(err)
+            raise IndexError(err)
         result_line = lines[result_ind+5]
 
         line_s = result_line.split()
