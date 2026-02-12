@@ -9,6 +9,7 @@ import numpy as np
 from glob import glob
 from astropy.table import Table
 from astropy.convolution import Box1DKernel, convolve
+from multiprocessing import Pool
 
 
 def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey='g00'):
@@ -33,6 +34,46 @@ def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey
             f.write(f'{wav} {flux}\n')
 
 
+def run_dusty_for_params(params):
+    (custom_input_spectrum_file,tstarval, tdust, tau, blackbody, shell_thickness, dust_type, tstarmin,
+     tstarmax, custom_grain_distribution, tau_wav_micron, dusty_file_dir, work_subdir) = params
+
+    dusty_parameters = DustyParameters(
+        custom_input_spectrum_file=custom_input_spectrum_file,
+        tdust=tdust,
+        tau=tau,
+        blackbody=blackbody,
+        shell_thickness=shell_thickness,
+        dust_type=dust_type,
+        tstarmin=tstarmin,
+        tstarmax=tstarmax,
+        custom_grain_distribution=custom_grain_distribution,
+        tau_wavelength_microns=tau_wav_micron,
+    )
+
+    dusty_runner = DustyCustomInputSpectrum(parameters=dusty_parameters,
+                                            dusty_working_directory=work_subdir,
+                                            dusty_file_directory=dusty_file_dir
+                                            )
+
+    base_filename = (f'sed_{tstarval}_{tdust.value}_{tau.value}_'
+                     f'{dust_type.value}_{shell_thickness.value}_{tau_wav_micron.value}um.dat')
+    filename = (f'{work_subdir}/{base_filename}')
+    if len(glob(f'{working_dir}/*/{base_filename}')) > 0:
+        return
+
+    os.chdir(work_subdir)
+    dusty_runner.generate_input()
+    dusty_runner.run()
+
+    lam, flx, npt, r1, ierror = dusty_runner.get_results()
+    with open(filename, 'w') as f:
+        f.write(f"# {r1}\n")
+        f.write("lam, flux\n")
+        for ind in range(len(lam)):
+            f.write(f"{lam[ind]}, {flx[ind]}\n")
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--phoenix_directory', type=str, default='/scr2/viraj/phoenix_files',)
@@ -43,27 +84,27 @@ if __name__ == '__main__':
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dtype", choices=['graphite', 'silicate',
-                                            'amorphous_carbon', 'silicate_carbide'],
-                        default='graphite')
+                                            'amorphous_carbon', 'silicate_carbide',
+                                            'silow'],
+                        default='silow')
     parser.add_argument('workdir', type=str, default=None, help='dusty workdir name')
     parser.add_argument('--dusty_file_dir', type=str, default='data/dusty_files',
                         help='Directory with dusty code files')
     parser.add_argument('--loglevel', type=str, default='DEBUG', help='logging level')
     parser.add_argument('--logfile', type=str, default=None, help='log file')
+    parser.add_argument('--ncpus', type=int, default=12, )
 
     args = parser.parse_args()
 
     logger = getLogger(args.loglevel, args.logfile)
 
-    # tstar_values = [2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,
-    #                 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900, 4000,
-    #                 4100, 4200, 4300, 4400, 4500
-    #                 ]
-    tstar_values = [4600, 4700, 4800, 4900, 5000, 5100, 5200, 5300, 5400, 5500]
-    tdust_values = [500,  600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600,
-                    1700, 1800, 1900, 2000]
+    tstar_values = [2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500,
+                    3600, 3700, 3800, 3900, 4000, 4100, 4200, 4300, 4400, 4500, 4600,
+                    4700, 4800, 4900, 5000, 5100, 5200, 5300, 5400, 5500, 5600, 5700,
+                    5800, 5900, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700,]
+    tdust_values = [200, 300, 400, 500,  600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
 
-    tau_values = 10**np.linspace(-2, 1, 15)
+    tau_values = 10**np.linspace(-0.5, 2.0, 15)
     log_gkey = args.log_gkey
 
     phoenix_dusty_format_dirname = f"{args.phoenix_directory}/phoenix_{log_gkey}_dusty_format"
@@ -75,6 +116,8 @@ if __name__ == '__main__':
                                                  f"{phoenix_dusty_format_dirname}/dusty_{Path(phoenix_filename).name.replace('.fits', '.dat')}",
                                                  log_gkey=log_gkey,
                                                  )
+    
+    ncpus = args.ncpus
 
     blackbody = Parameter(name='blackbody',
                           value=False)
@@ -101,6 +144,10 @@ if __name__ == '__main__':
             raise FileNotFoundError(f"Could not find phoenix file for Tstar = {tstarval}"
                                     f"in directory {phoenix_dusty_format_dirname}")
 
+    working_dir = args.workdir + '/phoenix_input_spectra_grid_g00'
+    Path(working_dir).mkdir(parents=True, exist_ok=True)
+    params_list = []
+    i = 0
     for tstarval in tstar_values:
         for tdustval in tdust_values:
             for tauval in tau_values:
@@ -119,34 +166,12 @@ if __name__ == '__main__':
                                 value=tauval,
                                 is_variable=False)
 
-                dusty_parameters = DustyParameters(
-                    custom_input_spectrum_file=custom_input_spectrum_file,
-                    tdust=tdust,
-                    tau=tau,
-                    blackbody=blackbody,
-                    shell_thickness=shell_thickness,
-                    dust_type=dust_type,
-                    tstarmin=tstarmin,
-                    tstarmax=tstarmax,
-                    custom_grain_distribution=custom_grain_distribution,
-                    tau_wavelength_microns=tau_wav_micron,
-                )
-
-                dusty_runner = DustyCustomInputSpectrum(parameters=dusty_parameters,
-                                                        dusty_working_directory=args.workdir,
-                                                        dusty_file_directory=args.dusty_file_dir
-                                                        )
-
-                os.chdir(args.workdir)
-                dusty_runner.generate_input()
-                dusty_runner.run()
-
-                lam, flx, npt, r1, ierror = dusty_runner.get_results()
-                with open(
-                        f"{args.workdir}/sed_{tstarval}_"
-                        f"{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_"
-                        f"{tau_wav_micron.value}um.dat", 'w') as f:
-                    f.write(f"# {r1}\n")
-                    f.write("lam, flux\n")
-                    for ind in range(len(lam)):
-                        f.write(f"{lam[ind]}, {flx[ind]}\n")
+                i += 1
+                work_subdir = f'{working_dir}/{i % ncpus}'
+                params_list.append([custom_input_spectrum_file, tstarval, tdust, tau,
+                                    blackbody, shell_thickness, dust_type, tstarmin,
+                                    tstarmax, custom_grain_distribution, tau_wav_micron,
+                                    args.dusty_file_dir,
+                                    work_subdir,])
+    pool =  Pool(processes=ncpus)
+    pool.map(run_dusty_for_params, params_list)
