@@ -79,7 +79,13 @@ class BaseDusty:
             lines = f.readlines()
         lines = np.array(lines)
         mask = np.array(['RESULTS:' in x for x in lines])
-        result_ind = np.where(mask)[0][0]
+        try:
+            result_ind = np.where(mask)[0][0]
+        except IndexError:
+            logger.error(f'No RESULTS line found in {self.file_basename}.out. '
+                         f'Returning ierror = 1'
+                         f'Working dir is {self.dusty_working_directory}')
+            raise IndexError
         result_line = lines[result_ind+5]
 
         line_s = result_line.split()
