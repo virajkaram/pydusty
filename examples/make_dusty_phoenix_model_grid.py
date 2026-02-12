@@ -174,7 +174,7 @@ if __name__ == '__main__':
                     continue
 
                 i += 1
-                work_subdir = f'{working_dir}/{i % ncpus}'
+                work_subdir = f'{working_dir}/run_{i}'
                 params_list.append([custom_input_spectrum_file, tstarval, tdust, tau,
                                     blackbody, shell_thickness, dust_type, tstarmin,
                                     tstarmax, custom_grain_distribution, tau_wav_micron,
