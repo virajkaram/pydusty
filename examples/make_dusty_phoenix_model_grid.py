@@ -116,7 +116,7 @@ if __name__ == '__main__':
                                                  f"{phoenix_dusty_format_dirname}/dusty_{Path(phoenix_filename).name.replace('.fits', '.dat')}",
                                                  log_gkey=log_gkey,
                                                  )
-    
+
     ncpus = args.ncpus
 
     blackbody = Parameter(name='blackbody',
