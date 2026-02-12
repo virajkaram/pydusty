@@ -84,7 +84,10 @@ class BaseDusty:
         except IndexError:
             err = (f'No RESULTS line found in {self.file_basename}.out. '
                          f'Returning ierror = 1'
-                         f'Working dir is {self.dusty_working_directory}')
+                         f'Working dir is {self.dusty_working_directory}.'
+                         f'Parameters are {self.parameters.get_printable_string()}.'
+                         f'Contents of {self.file_basename}.out are :\n {lines}'
+                   )
             logger.error(err)
             raise IndexError(err)
         result_line = lines[result_ind+5]
