@@ -68,8 +68,8 @@ if __name__ == '__main__':
 
     logger = getLogger(args.loglevel, args.logfile)
 
-    # tstar values 2500 to 7500 in steps of 100
-    tstar_values = np.arange(2500, 7501, 100)
+    # tstar values 2000 to 7500 in steps of 100
+    tstar_values = np.arange(2000, 7501, 100)
 
     # tdust values 100 to 1500 in steps of 100
     tdust_values = np.arange(100, 1501, 100)
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     #tdust values 0.01 to 100 in log steps
     tau_values = np.logspace(-2, 2, 20)
 
-    shell_thickness_values = [2.0, 5.0, 10.0, 20.0, 40.0, 50.0]
+    shell_thickness_values = np.array([2.0, 5.0, 10.0, 20.0, 40.0, 50.0])
 
     # Total parameters :
     n_cpus = args.ncpus
@@ -86,7 +86,7 @@ if __name__ == '__main__':
                           value=True)
 
     tstarmin = Parameter(name='tstarmin',
-                         value=2500)
+                         value=2000)
     tstarmax = Parameter(name='tstarmin',
                          value=48999)
     custom_grain_distribution = Parameter(name='custom_grain_distribution',
