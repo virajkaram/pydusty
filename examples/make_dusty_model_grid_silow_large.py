@@ -50,6 +50,10 @@ def run_dusty_for_params(params):
         for ind in range(len(lam)):
             f.write(f"{lam[ind]}, {flx[ind]}\n")
 
+    # Cleanup directory - remove all files except the sed file
+    for file in glob(f'{work_subdir}/*'):
+        if file != filename:
+            os.remove(file)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
