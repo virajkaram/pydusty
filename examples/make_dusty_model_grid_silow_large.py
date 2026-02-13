@@ -73,7 +73,8 @@ if __name__ == '__main__':
     logger = getLogger(args.loglevel, args.logfile)
 
     # tstar values 2000 to 7500 in steps of 100
-    tstar_values = np.arange(2000, 7501, 100)
+    # tstar_values = np.arange(2000, 7501, 100)
+    tstar_values = np.arange(7600, 12001, 100)
 
     # tdust values 100 to 1500 in steps of 100
     tdust_values = np.arange(100, 1501, 100)
