@@ -39,8 +39,6 @@ def run_dusty_for_params(params):
                      f'{grain_size.value}_{shell_thickness.value}_'
                      f'{dust_type_param.value}.dat')
     filename = (f'{work_subdir}/{base_filename}')
-    if len(glob(f'{working_dir}/*/{base_filename}')) > 0:
-        return
 
     os.chdir(work_subdir)
     dusty_runner.generate_input()
