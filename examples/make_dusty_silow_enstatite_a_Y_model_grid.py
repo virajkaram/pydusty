@@ -5,7 +5,6 @@ import argparse
 from pydusty.utils import getLogger
 from pathlib import Path
 from glob import glob
-from tqdm import tqdm
 import numpy as np
 from multiprocessing import Pool
 
