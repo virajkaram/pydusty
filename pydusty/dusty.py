@@ -331,7 +331,9 @@ external_elements_filenames_dict = {'alumina': 'Al2O3-comp.nk',
                                     'glassy_olivine': 'gloliMg50.nk',
                                     'glassy_pyroxene': 'glpyrMg50.nk',
                                     'feo': 'FeO.nk',
-                                    'glassy_silicate': 'glSil.nk'
+                                    'glassy_silicate': 'glSil.nk',
+                                    'enstatite': 'enstatite.nk',
+                                    'forsterite': 'forsterite.nk',
                                     }
 
 
