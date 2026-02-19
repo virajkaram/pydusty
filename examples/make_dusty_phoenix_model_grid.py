@@ -143,7 +143,7 @@ if __name__ == '__main__':
             raise FileNotFoundError(f"Could not find phoenix file for Tstar = {tstarval}"
                                     f"in directory {phoenix_dusty_format_dirname}")
 
-    working_dir = args.workdir + '/phoenix_input_spectra_grid_g00'
+    working_dir = args.workdir + f'/phoenix_input_spectra_grid_{args.log_gkey}'
     Path(working_dir).mkdir(parents=True, exist_ok=True)
     params_list = []
     i = 0
