@@ -100,12 +100,10 @@ if __name__ == '__main__':
     logger = getLogger(args.loglevel, args.logfile)
 
     tstar_values = [2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500,
-                    3600, 3700, 3800, 3900, 4000, 4100, 4200, 4300, 4400, 4500, 4600,
-                    4700, 4800, 4900, 5000, 5100, 5200, 5300, 5400, 5500, 5600, 5700,
-                    5800, 5900, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700,]
-    tdust_values = [200, 300, 400, 500,  600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
+                    3600, 3700, 3800, 3900, 4000]
+    tdust_values = [500,  600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
 
-    tau_values = 10**np.linspace(-0.5, 2.0, 15)
+    tau_values = 10**np.linspace(-1.0, 1.0, 10)
     log_gkey = args.log_gkey
 
     phoenix_dusty_format_dirname = f"{args.phoenix_directory}/phoenix_{log_gkey}_dusty_format"
