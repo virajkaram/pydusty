@@ -81,7 +81,7 @@ if __name__ == '__main__':
     parser.add_argument("--log_gkey", type=str,
                         default='g00')
     parser.add_argument('--skip_remaking_dusty_format', action='store_true')
-    parser.add_argument("--tau_wav_micron", type=float, default=100.0,
+    parser.add_argument("--tau_wav_micron", type=float, default=0.55,
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--thick", type=float, default=2.0)
     parser.add_argument("--dtype", choices=['graphite', 'silicate',
@@ -143,7 +143,7 @@ if __name__ == '__main__':
             raise FileNotFoundError(f"Could not find phoenix file for Tstar = {tstarval}"
                                     f"in directory {phoenix_dusty_format_dirname}")
 
-    working_dir = args.workdir + f'/phoenix_input_spectra_grid_{args.log_gkey}'
+    working_dir = args.workdir + f'/phoenix_input_spectra_grid_{args.log_gkey}_Y{args.thick}'
     Path(working_dir).mkdir(parents=True, exist_ok=True)
     params_list = []
     i = 0
@@ -165,7 +165,7 @@ if __name__ == '__main__':
                                 value=tauval,
                                 is_variable=False)
 
-                base_filename = (f'sed_{tstarval}_{tdust.value}_{tau.value}_'
+                base_filename = (f'sed_{tstarval}_{tdust.value}_{round(tau.value,2)}_'
                                  f'{dust_type.value}_{shell_thickness.value}_{tau_wav_micron.value}um.dat')
 
                 if len(glob(f'{working_dir}/*/{base_filename}')) > 0:
