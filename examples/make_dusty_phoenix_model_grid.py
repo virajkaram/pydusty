@@ -23,8 +23,8 @@ def convert_phoenix_file_to_dusty_format(phoenix_filename, outfilename, log_gkey
     # convolve to fewer than 10000 points
     kernel = Box1DKernel(20)
     phnx_flx = convolve(phnx_flx, kernel)
-    phnx_wavs_short = phnx_wavs[::20]
-    phnx_flx_short = phnx_flx[::20]
+    phnx_wavs_short = phnx_wavs[::10]
+    phnx_flx_short = phnx_flx[::10]
     assert len(phnx_wavs_short) < 10000
     with open(outfilename, 'w') as f:
         f.write(f'# Custom input spectrum file for dusty from {phoenix_filename}\n')
