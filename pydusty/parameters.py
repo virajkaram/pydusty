@@ -47,6 +47,8 @@ default_tau_wavelength_micron_parameter = Parameter(name='tau_wav', value=0.55,
                                                     is_variable=False)
 default_error_underestimate_factor = Parameter(name='error_underestimate_factor', value=0.0,
                                                is_variable=False)
+default_shell_density_powerlaw_index_parameter = Parameter(name='shell_density_powerlaw_index',
+                                                           value=2.0, is_variable=False)
 class DustyParameters:
     def __init__(self,
                  tdust: Parameter,
@@ -68,6 +70,7 @@ class DustyParameters:
                  dust_composition_elements: list[str] = None,
                  dust_composition_abundances: list[float] = None,
                  custom_input_spectrum_file: Parameter = None,
+                 dust_shell_density_powerlaw_index: Parameter = default_shell_density_powerlaw_index_parameter,
                  ):
         self.tstar = tstar
         self.tdust = tdust
@@ -86,6 +89,7 @@ class DustyParameters:
         self.al_com_abundance = al_com_abundance
         self.error_underestimate_factor = error_underestimate_factor
         self.custom_input_spectrum_file = custom_input_spectrum_file
+        self.density_powerlaw_index = dust_shell_density_powerlaw_index
         if self.ebv is None:
             self.ebv = Parameter(name='ebv', value=0, is_variable=False)
 

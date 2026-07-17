@@ -13,6 +13,7 @@ if __name__ == '__main__':
                         help="wavelength in um at which tau is specified")
     parser.add_argument("--tdust", type=float, default=1000)
     parser.add_argument("--thick", type=float, default=2.0)
+    parser.add_argument("--density_powerlaw_index", type=float, default=2.0,)
     parser.add_argument("--dtype", choices=['graphite', 'silicate',
                                             'amorphous_carbon', 'silicate_carbide',
                                             'silow'
@@ -54,6 +55,8 @@ if __name__ == '__main__':
                                           value=False)
     tau_wav_micron = Parameter(name='tau_wav', value=args.tau_wav_micron,
                                is_variable=False)
+    density_powerlaw_index = Parameter(name='shell_density_powerlaw_index',
+                                       value=args.density_powerlaw_index, is_variable=False)
     dusty_parameters = DustyParameters(
         tstar=tstar,
         tdust=tdust,
@@ -65,6 +68,7 @@ if __name__ == '__main__':
         tstarmax=tstarmax,
         custom_grain_distribution=custom_grain_distribution,
         tau_wavelength_microns=tau_wav_micron,
+        dust_shell_density_powerlaw_index=density_powerlaw_index
     )
 
     dusty_runner = Dusty(parameters=dusty_parameters,
@@ -77,7 +81,7 @@ if __name__ == '__main__':
     dusty_runner.run()
 
     lam, flx, npt, r1, ierror = dusty_runner.get_results()
-    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_{tau_wav_micron.value}um.dat', 'w') as f:
+    with open(f'{args.workdir}/sed_{tstar.value}_{tdust.value}_{tau.value}_{dust_type.value}_{shell_thickness.value}_n{density_powerlaw_index.value}_{tau_wav_micron.value}um.dat', 'w') as f:
         f.write(f"# {r1}\n")
         f.write("lam, flux\n")
         for ind in range(len(lam)):

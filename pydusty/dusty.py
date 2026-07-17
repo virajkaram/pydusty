@@ -142,7 +142,7 @@ class Dusty(BaseDusty):
         output.write('- density type = 1                   \n')
         output.write('- number of powers = 1              \n')
         output.write(f'- shells relative thickness = {self.parameters.shell_thickness.value}\n')
-        output.write('- power = 2 \n')
+        output.write(f'- power = {self.parameters.density_powerlaw_index.value} \n')
         output.write('- grid type = 1                  % linear grid \n')
         output.write(f'- lambda0 = {self.parameters.tau_wavelength_microns.value} micron          % optical depth specified  \n')
         output.write('- tau(min) = ' + str(
